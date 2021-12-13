@@ -18,7 +18,7 @@ public class TestsCamera extends BaseProcessing
 
         classe = new Classe(this, 4, 3);
         
-        classe.translate(-(Table.LONGUEUR*4)/2f, 0, -(Table.LONGUEUR*3)/2f);
+        classe.translate(-(classe.getLargeur())/2f, 0, -(classe.getLongueur())/2f);
         axis = new Axis(0f, 0f, 0f, width, height, width, 2);
     }
 

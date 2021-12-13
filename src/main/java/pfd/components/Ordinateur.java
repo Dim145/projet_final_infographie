@@ -410,7 +410,7 @@ public class Ordinateur extends Composand3D
         shape.texture(clavier);
         shape.shininess(Utilities.IMAGE_SHININESS);
         shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
+        shape.normal(0, 1, 0);
         shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 1, 1);
         shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 1);
         shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
