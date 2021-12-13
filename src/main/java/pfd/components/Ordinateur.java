@@ -1,18 +1,26 @@
 package pfd.components;
 
+import pfd.Utilities;
 import pfd.baseComponents.Composand3D;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PShape;
+
+import java.awt.*;
 
 public class Ordinateur extends Composand3D
 {
     public static final int LARGUEUR = 20;
     public static final int LONGUEUR = LARGUEUR * 2;
-    public static final int EPAISSEUR = LONGUEUR /20;
+    public static final int EPAISSEUR = LONGUEUR / 20;
     public static final int HAUTEUR_ECRAN = 10;
 
     public static final int LARGEUR_TOUR = EPAISSEUR * 10;
-    public static final int LARGEUR_CLAVIER = (int) (LARGEUR_TOUR/2.25);
+    public static final int LARGEUR_CLAVIER = (int) (LARGEUR_TOUR / 2.25);
+
+
+    private static PImage ecran;
+    private static PImage clavier;
 
     private final boolean tourGauche;
 
@@ -22,15 +30,20 @@ public class Ordinateur extends Composand3D
 
         this.tourGauche = tourGauche;
 
-        if(!tourGauche)
-            this.origZ -= HAUTEUR_ECRAN;
+        if(ecran == null)
+            ecran = applet.loadImage("images/ordi.png");
+
+        if(clavier == null)
+            clavier = applet.loadImage("images/clavier.png");
+
+        if (!tourGauche) this.origZ -= HAUTEUR_ECRAN;
 
         this.addChild(creerEcran());
-        this.addChild(creerPlat(this.origZ + (LONGUEUR - HAUTEUR_ECRAN)/2f));
+        this.addChild(creerPlat(this.origZ + (LONGUEUR - HAUTEUR_ECRAN) / 2f));
         this.addChild(creerTour(tourGauche));
         this.addChild(creerClavier());
         this.origY += 1;
-        this.addChild(creerPied(baseX + 0.5f, this.origZ + (LONGUEUR - HAUTEUR_ECRAN)/2f));
+        this.addChild(creerPied(baseX + 0.5f, this.origZ + (LONGUEUR - HAUTEUR_ECRAN) / 2f));
     }
 
     public Ordinateur(PApplet applet)
@@ -40,44 +53,81 @@ public class Ordinateur extends Composand3D
 
     private PShape creerEcran()
     {
-        PShape shape = this.applet.createShape();
+        PShape finalShape = this.applet.createShape(GROUP);
 
         int baseZ = this.origZ + (this.tourGauche ? HAUTEUR_ECRAN : 0);
 
+        PShape shape = applet.createShape();
+
         shape.beginShape(QUADS);
-        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ);
-
-        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-
-        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ);
-
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-
-        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-
-        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ);
-        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR);
-
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
         shape.endShape();
+        finalShape.addChild(shape);
 
-        return shape;
+        shape = applet.createShape();
+        shape.beginShape(QUADS);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.endShape();
+        finalShape.addChild(shape);
+
+        shape = applet.createShape();
+        shape.beginShape(QUADS);
+        shape.fill(Utilities.DARK_GRAY);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.endShape();
+        finalShape.addChild(shape);
+
+        shape = applet.createShape();
+        shape.beginShape(QUADS);
+        shape.textureMode(NORMAL);
+        shape.texture(ecran);
+        shape.shininess(Utilities.IMAGE_SHININESS*4);
+        shape.emissive(0, 0, 0);
+        shape.normal(0, 0, 1);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 1);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR, 1, 1);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR, 1, 0);
+        shape.endShape();
+        finalShape.addChild(shape);
+
+        shape = applet.createShape();
+        shape.beginShape(QUADS);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.endShape();
+        finalShape.addChild(shape);
+
+        shape = applet.createShape();
+        shape.beginShape(QUADS);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
+        shape.endShape();
+        finalShape.addChild(shape);
+
+        return finalShape;
     }
 
     private PShape creerPied(float baseX, float baseZ)
@@ -86,60 +136,71 @@ public class Ordinateur extends Composand3D
 
         PShape shape = this.applet.createShape();
 
-        if(tourGauche)
-            baseZ += HAUTEUR_ECRAN;
+        if (tourGauche) baseZ += HAUTEUR_ECRAN;
 
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ, 0, 0);
         shape.endShape();
 
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ + HAUTEUR_ECRAN);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ );
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN );
-        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ);
-        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN*2, baseZ);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY, baseZ, 0, 0);
+        shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
@@ -152,60 +213,71 @@ public class Ordinateur extends Composand3D
 
         PShape shape = this.applet.createShape();
 
-        if(tourGauche)
-            baseZ += HAUTEUR_ECRAN;
+        if (tourGauche) baseZ += HAUTEUR_ECRAN;
 
         shape.beginShape(QUADS);
-        shape.vertex(origX, this.origY, baseZ - EPAISSEUR/2f);
-        shape.vertex(origX, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(origX + EPAISSEUR*2, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(origX + EPAISSEUR*2, this.origY, baseZ - EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(origX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.endShape();
 
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(origX, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
-        shape.vertex(origX, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
-        shape.vertex(origX  + EPAISSEUR*2, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
-        shape.vertex(origX + EPAISSEUR*2, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(origX, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(origX, this.origY, baseZ - EPAISSEUR/2f );
-        shape.vertex(origX, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f );
-        shape.vertex(origX + EPAISSEUR*2, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
-        shape.vertex(origX + EPAISSEUR*2, this.origY, baseZ - EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(origX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(origX + EPAISSEUR*2, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
-        shape.vertex(origX + EPAISSEUR*2, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(origX, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(origX, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(origX, this.origY, baseZ - EPAISSEUR/2f);
-        shape.vertex(origX, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(origX, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
-        shape.vertex(origX, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(origX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(origX + EPAISSEUR*2, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
-        shape.vertex(origX + EPAISSEUR*2, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR/2f);
-        shape.vertex(origX + EPAISSEUR*2, this.origY, baseZ - EPAISSEUR/2f);
-        shape.vertex(origX + EPAISSEUR*2, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
@@ -222,56 +294,68 @@ public class Ordinateur extends Composand3D
         int baseX = this.origX;
 
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.METAL_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ, 0, 0);
         shape.endShape();
 
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ + HAUTEUR_ECRAN);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.METAL_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ );
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN );
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.METAL_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.METAL_SHININESS);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ);
-        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.METAL_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
+        shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN*2, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ + HAUTEUR_ECRAN);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ);
-        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN*2, baseZ);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.METAL_SHININESS);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ, 0, 0);
+        shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
@@ -285,59 +369,74 @@ public class Ordinateur extends Composand3D
         PShape shape = this.applet.createShape();
 
         int baseZ = this.origZ + (tourGauche ? HAUTEUR_ECRAN : 0) + HAUTEUR_ECRAN;
-        int baseX = this.origX + EPAISSEUR*11;
+        int baseX = this.origX + EPAISSEUR * 11;
 
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ - EPAISSEUR/2f);
-        shape.vertex(baseX, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ - EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.endShape();
 
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
-        shape.vertex(baseX, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ - EPAISSEUR/2f );
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f );
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ - EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(baseX, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(baseX, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
+        shape.textureMode(PImage.NORMAL);
+        shape.texture(clavier);
+        shape.shininess(Utilities.IMAGE_SHININESS);
+        shape.emissive(0, 0, 0);
+        shape.normal(0, 0, 1);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 1, 1);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 1);
+        shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 1, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, this.origY, baseZ - EPAISSEUR/2f);
-        shape.vertex(baseX, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
-        shape.vertex(baseX, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
-        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR/2f, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ + HAUTEUR_ECRAN*2 + EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ - EPAISSEUR/2f);
-        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR/2f, baseZ - EPAISSEUR/2f);
+        shape.fill(Utilities.BLACK);
+        shape.shininess(Utilities.MAT_SHININESS);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
+        shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.endShape();
         finalShape.addChild(shape);
 
