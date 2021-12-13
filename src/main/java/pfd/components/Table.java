@@ -35,56 +35,56 @@ public class Table extends Composand3D
         PShape shape = this.applet.createShape();
 
         shape.beginShape(QUADS);
-        shape.vertex(baseX, 0, baseZ);
-        shape.vertex(baseX, HAUTEUR, baseZ);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, HAUTEUR, baseZ);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, 0, baseZ);
+        shape.vertex(baseX, this.origY, baseZ);
+        shape.vertex(baseX, this.origY + HAUTEUR, baseZ);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY + HAUTEUR, baseZ);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY, baseZ);
         shape.endShape();
 
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, 0, baseZ + EPAISSEUR_PLATEUR);
-        shape.vertex(baseX, HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, 0, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX, this.origY + HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY + HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY, baseZ + EPAISSEUR_PLATEUR);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, 0, baseZ );
-        shape.vertex(baseX, 0, baseZ + EPAISSEUR_PLATEUR );
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, 0, baseZ + EPAISSEUR_PLATEUR);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, 0, baseZ);
+        shape.vertex(baseX, this.origY, baseZ );
+        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEUR );
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY, baseZ);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, HAUTEUR, baseZ);
-        shape.vertex(baseX, HAUTEUR, baseZ);
-        shape.vertex(baseX, HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY + HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY + HAUTEUR, baseZ);
+        shape.vertex(baseX, this.origY + HAUTEUR, baseZ);
+        shape.vertex(baseX, this.origY + HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, 0, baseZ);
-        shape.vertex(baseX, HAUTEUR, baseZ);
-        shape.vertex(baseX, HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
-        shape.vertex(baseX, 0, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX, this.origY, baseZ);
+        shape.vertex(baseX, this.origY + HAUTEUR, baseZ);
+        shape.vertex(baseX, this.origY + HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEUR);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, 0, baseZ + EPAISSEUR_PLATEUR);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, 0, baseZ);
-        shape.vertex(baseX + EPAISSEUR_PLATEUR, HAUTEUR, baseZ);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY + HAUTEUR, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY, baseZ + EPAISSEUR_PLATEUR);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY, baseZ);
+        shape.vertex(baseX + EPAISSEUR_PLATEUR, this.origY + HAUTEUR, baseZ);
         shape.endShape();
         finalShape.addChild(shape);
 
@@ -96,35 +96,35 @@ public class Table extends Composand3D
         PShape shape = this.applet.createShape();
 
         shape.beginShape(QUADS);
-        shape.vertex(this.origX, HAUTEUR, this.origZ);
-        shape.vertex(this.origX, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR, this.origZ);
+        shape.vertex(this.origX, this.origY + HAUTEUR, this.origZ);
+        shape.vertex(this.origX, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR, this.origZ);
 
-        shape.vertex(this.origX, HAUTEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX, this.origY + HAUTEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR, this.origZ + LONGUEUR);
 
-        shape.vertex(this.origX, HAUTEUR, this.origZ);
-        shape.vertex(this.origX, HAUTEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR, this.origZ);
+        shape.vertex(this.origX, this.origY + HAUTEUR, this.origZ);
+        shape.vertex(this.origX, this.origY + HAUTEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR, this.origZ);
 
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
-        shape.vertex(this.origX, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
-        shape.vertex(this.origX, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
+        shape.vertex(this.origX, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
+        shape.vertex(this.origX, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
 
-        shape.vertex(this.origX, HAUTEUR, this.origZ);
-        shape.vertex(this.origX, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
-        shape.vertex(this.origX, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX, HAUTEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX, this.origY + HAUTEUR, this.origZ);
+        shape.vertex(this.origX, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
+        shape.vertex(this.origX, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX, this.origY + HAUTEUR, this.origZ + LONGUEUR);
 
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR, this.origZ + LONGUEUR);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR, this.origZ);
-        shape.vertex(this.origX + LARGUEUR, HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR, this.origZ + LONGUEUR);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR, this.origZ);
+        shape.vertex(this.origX + LARGUEUR, this.origY + HAUTEUR + EPAISSEUR_PLATEUR, this.origZ);
 
         shape.endShape();
 

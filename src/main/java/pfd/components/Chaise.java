@@ -35,56 +35,56 @@ public class Chaise extends Composand3D
         PShape shape = this.applet.createShape();
 
         shape.beginShape(QUADS);
-        shape.vertex(baseX, 0, baseZ);
-        shape.vertex(baseX, arriere ? HAUTEUR : COTE, baseZ);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, arriere ? HAUTEUR : COTE, baseZ);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, 0, baseZ);
+        shape.vertex(baseX, this.origY, baseZ);
+        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ);
         shape.endShape();
 
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, 0, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX, arriere ? HAUTEUR : COTE, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, arriere ? HAUTEUR : COTE, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, 0, baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ + EPAISSEUR_PLATEAU);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, 0, baseZ );
-        shape.vertex(baseX, 0, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, 0, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, 0, baseZ);
+        shape.vertex(baseX, this.origY, baseZ );
+        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, arriere ? HAUTEUR : COTE, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, arriere ? HAUTEUR : COTE, baseZ);
-        shape.vertex(baseX, arriere ? HAUTEUR : COTE, baseZ);
-        shape.vertex(baseX, arriere ? HAUTEUR : COTE, baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ);
+        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ);
+        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX, 0, baseZ);
-        shape.vertex(baseX, arriere ? HAUTEUR : COTE, baseZ);
-        shape.vertex(baseX, arriere ? HAUTEUR : COTE, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX, 0, baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX, this.origY, baseZ);
+        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ);
+        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEAU);
         shape.endShape();
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, arriere ? HAUTEUR : COTE, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, 0, baseZ + EPAISSEUR_PLATEAU);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, 0, baseZ);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, arriere ? HAUTEUR : COTE, baseZ);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ + EPAISSEUR_PLATEAU);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ);
+        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ);
         shape.endShape();
         finalShape.addChild(shape);
 
@@ -96,35 +96,35 @@ public class Chaise extends Composand3D
         PShape shape = this.applet.createShape();
 
         shape.beginShape(QUADS);
-        shape.vertex(this.origX, COTE, this.origZ);
-        shape.vertex(this.origX, COTE + EPAISSEUR_PLATEAU, this.origZ);
-        shape.vertex(this.origX + COTE, COTE + EPAISSEUR_PLATEAU, this.origZ);
-        shape.vertex(this.origX + COTE, COTE, this.origZ);
+        shape.vertex(this.origX, this.origY + COTE, this.origZ);
+        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ);
+        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ);
+        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ);
 
-        shape.vertex(this.origX, COTE, this.origZ + COTE);
-        shape.vertex(this.origX, COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
-        shape.vertex(this.origX + COTE, COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
-        shape.vertex(this.origX + COTE, COTE, this.origZ + COTE);
+        shape.vertex(this.origX, this.origY + COTE, this.origZ + COTE);
+        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
+        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
+        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ + COTE);
 
-        shape.vertex(this.origX, COTE, this.origZ);
-        shape.vertex(this.origX, COTE, this.origZ + COTE);
-        shape.vertex(this.origX + COTE, COTE, this.origZ + COTE);
-        shape.vertex(this.origX + COTE, COTE, this.origZ);
+        shape.vertex(this.origX, this.origY + COTE, this.origZ);
+        shape.vertex(this.origX, this.origY + COTE, this.origZ + COTE);
+        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ + COTE);
+        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ);
 
-        shape.vertex(this.origX + COTE, COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
-        shape.vertex(this.origX + COTE, COTE + EPAISSEUR_PLATEAU, this.origZ);
-        shape.vertex(this.origX, COTE + EPAISSEUR_PLATEAU, this.origZ);
-        shape.vertex(this.origX, COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
+        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
+        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ);
+        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ);
+        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
 
-        shape.vertex(this.origX, COTE, this.origZ);
-        shape.vertex(this.origX, COTE + EPAISSEUR_PLATEAU, this.origZ);
-        shape.vertex(this.origX, COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
-        shape.vertex(this.origX, COTE, this.origZ + COTE);
+        shape.vertex(this.origX, this.origY + COTE, this.origZ);
+        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ);
+        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
+        shape.vertex(this.origX, this.origY + COTE, this.origZ + COTE);
 
-        shape.vertex(this.origX + COTE, COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
-        shape.vertex(this.origX + COTE, COTE, this.origZ + COTE);
-        shape.vertex(this.origX + COTE, COTE, this.origZ);
-        shape.vertex(this.origX + COTE, COTE + EPAISSEUR_PLATEAU, this.origZ);
+        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE);
+        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ + COTE);
+        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ);
+        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ);
 
         shape.endShape();
 
@@ -136,35 +136,35 @@ public class Chaise extends Composand3D
         PShape shape = this.applet.createShape();
 
         shape.beginShape(QUADS);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
 
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
 
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
 
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
 
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
 
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
+        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT);
 
         shape.endShape();
 
