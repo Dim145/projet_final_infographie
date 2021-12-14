@@ -60,7 +60,10 @@ public class Ordinateur extends Composand3D
         PShape shape = applet.createShape();
 
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
         shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
@@ -71,7 +74,9 @@ public class Ordinateur extends Composand3D
 
         shape = applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
         shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
@@ -82,7 +87,9 @@ public class Ordinateur extends Composand3D
 
         shape = applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.DARK_GRAY);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.DARK_GRAY);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
         shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ + LONGUEUR, 0, 0);
@@ -107,7 +114,9 @@ public class Ordinateur extends Composand3D
 
         shape = applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(this.origX + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
         shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + HAUTEUR_ECRAN, baseZ, 0, 0);
@@ -118,7 +127,9 @@ public class Ordinateur extends Composand3D
 
         shape = applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(this.origX + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
         shape.vertex(this.origX + EPAISSEUR + EPAISSEUR, this.origY + LARGUEUR + HAUTEUR_ECRAN, baseZ, 0, 0);
@@ -139,7 +150,9 @@ public class Ordinateur extends Composand3D
         if (tourGauche) baseZ += HAUTEUR_ECRAN;
 
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX, this.origY, baseZ, 0, 0);
         shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
@@ -151,7 +164,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
@@ -162,7 +178,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX, this.origY, baseZ, 0, 0);
         shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
@@ -173,7 +191,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
@@ -184,7 +204,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX, this.origY, baseZ, 0, 0);
         shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
@@ -195,7 +217,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX + EPAISSEUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.vertex(baseX + EPAISSEUR, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
@@ -216,7 +240,10 @@ public class Ordinateur extends Composand3D
         if (tourGauche) baseZ += HAUTEUR_ECRAN;
 
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(origX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
@@ -228,7 +255,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(origX, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
         shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
@@ -239,7 +269,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(origX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.vertex(origX, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
@@ -250,7 +283,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
         shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
@@ -261,7 +297,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(origX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.vertex(origX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
@@ -272,7 +311,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(origX + EPAISSEUR * 2, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
         shape.vertex(origX + EPAISSEUR * 2, this.origY, baseZ + HAUTEUR_ECRAN + EPAISSEUR / 2f, 0, 0);
@@ -294,7 +336,9 @@ public class Ordinateur extends Composand3D
         int baseX = this.origX;
 
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.METAL_SHININESS);
         shape.vertex(baseX, this.origY, baseZ, 0, 0);
         shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
@@ -306,7 +350,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.METAL_SHININESS);
         shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
@@ -317,7 +363,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.METAL_SHININESS);
         shape.vertex(baseX, this.origY, baseZ, 0, 0);
         shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
@@ -328,7 +377,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.METAL_SHININESS);
         shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
@@ -339,7 +391,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.METAL_SHININESS);
         shape.vertex(baseX, this.origY, baseZ, 0, 0);
         shape.vertex(baseX, this.origY + HAUTEUR_ECRAN * 2, baseZ, 0, 0);
@@ -350,7 +405,10 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.METAL_SHININESS);
         shape.vertex(baseX + LARGEUR_TOUR, this.origY + HAUTEUR_ECRAN * 2, baseZ + HAUTEUR_ECRAN, 0, 0);
         shape.vertex(baseX + LARGEUR_TOUR, this.origY, baseZ + HAUTEUR_ECRAN, 0, 0);
@@ -372,7 +430,9 @@ public class Ordinateur extends Composand3D
         int baseX = this.origX + EPAISSEUR * 11;
 
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
@@ -384,7 +444,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
         shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
@@ -395,7 +457,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.vertex(baseX, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
@@ -420,7 +484,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX, this.origY, baseZ - EPAISSEUR / 2f, 0, 0);
         shape.vertex(baseX, this.origY + EPAISSEUR / 2f, baseZ - EPAISSEUR / 2f, 0, 0);
@@ -431,7 +497,9 @@ public class Ordinateur extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
-        shape.fill(Utilities.BLACK);
+        shape.textureMode(NORMAL);
+        shape.texture(Utilities.getDefaultImage(applet));
+        shape.tint(Utilities.BLACK);
         shape.shininess(Utilities.MAT_SHININESS);
         shape.vertex(baseX + LARGEUR_CLAVIER, this.origY + EPAISSEUR / 2f, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
         shape.vertex(baseX + LARGEUR_CLAVIER, this.origY, baseZ + HAUTEUR_ECRAN * 2 + EPAISSEUR / 2f, 0, 0);
