@@ -34,20 +34,20 @@ public class Classe extends Composand3D
         this.largeur += Table.LARGUEUR;
         this.longeur += departBureauxLongeur;
 
-        Mur[] murs = new Mur[4];
+        /*Boite[] murs = new Boite[4];
 
-        murs[0] = new Mur(applet, this.origX, this.origY, this.origZ);
-        murs[1] = new Mur(applet, this.getLargeur(), this.origY, this.getLongueur());
-        murs[2] = new Mur(applet, this.getLargeur(), this.origY, this.origZ);
-        murs[3] = new Mur(applet, this.origX, this.origY, this.getLongueur());
+        murs[0] = new Boite(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
+        murs[1] = new Boite(applet, this.getLargeur(), this.origY, this.getLongueur());
+        murs[2] = new Boite(applet, this.getLargeur(), this.origY, this.origZ);
+        murs[3] = new Boite(applet, this.origX, this.origY, this.getLongueur());
 
-        murs[0].finilize(this.getLargeur(), HAUTEUR, Sol.EPAISSEUR);
+        murs[0].finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR, Sol.EPAISSEUR);
         murs[1].finilize(-this.getLargeur() - Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
         murs[2].finilize(Sol.EPAISSEUR, HAUTEUR, this.getLongueur() + Sol.EPAISSEUR);
         murs[3].finilize(-Sol.EPAISSEUR, HAUTEUR, -this.getLongueur());
 
-        for (Mur m : murs)
-            this.addChild(m);
+        for (Boite m : murs)
+            this.addChild(m);*/
     }
 
     public float getLongueur()

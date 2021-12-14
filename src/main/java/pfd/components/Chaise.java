@@ -2,6 +2,7 @@ package pfd.components;
 
 import pfd.Utilities;
 import pfd.baseComponents.Composand3D;
+import pfd.baseComponents.Face;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
@@ -45,282 +46,30 @@ public class Chaise extends Composand3D
 
     private PShape creerPied(float baseX, float baseZ, boolean arriere)
     {
-        PShape finalShape = this.applet.createShape(GROUP);
+        Boite b = new Boite(applet, baseX, this.origY, baseZ);
 
-        PShape shape = this.applet.createShape();
+        b.tint(Utilities.RED);
 
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(Utilities.getDefaultImage(applet));
-        shape.tint(Utilities.RED);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 1, 0);
-        shape.vertex(baseX, this.origY, baseZ, 0, 0);
-        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ, 0, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ, 1, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ, 1, 0);
-        shape.endShape();
-
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(Utilities.getDefaultImage(applet));
-        shape.tint(Utilities.RED);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, -1);
-        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEAU, 0, 0);
-        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU, 0, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU, 1, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ + EPAISSEUR_PLATEAU, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(Utilities.getDefaultImage(applet));
-        shape.tint(Utilities.RED);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(baseX, this.origY, baseZ , 0, 0);
-        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEAU, 0, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ + EPAISSEUR_PLATEAU, 1, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(Utilities.getDefaultImage(applet));
-        shape.tint(Utilities.RED);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU, 0, 0);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ, 0, 1);
-        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ, 1, 1);
-        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(Utilities.getDefaultImage(applet));
-        shape.tint(Utilities.RED);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(baseX, this.origY, baseZ, 0, 0);
-        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ, 0, 1);
-        shape.vertex(baseX, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU, 1, 1);
-        shape.vertex(baseX, this.origY, baseZ + EPAISSEUR_PLATEAU, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(Utilities.getDefaultImage(applet));
-        shape.tint(Utilities.RED);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ + EPAISSEUR_PLATEAU, 0, 0);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ + EPAISSEUR_PLATEAU, 0, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY, baseZ, 1, 1);
-        shape.vertex(baseX + EPAISSEUR_PLATEAU, this.origY + (arriere ? HAUTEUR : COTE), baseZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        return finalShape;
+        return b.finilize(EPAISSEUR_PLATEAU, (arriere ? HAUTEUR : COTE), EPAISSEUR_PLATEAU);
     }
 
     private PShape creerPlateau()
     {
-        PShape finalShape = applet.createShape(GROUP);
+        Boite b = new Boite(applet, origX, origY + COTE, origZ);
 
-        PShape shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX, this.origY + COTE, this.origZ, 0, 0);
-        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ, 1, 1);
-        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ, 0, 1);
-        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
+        b.texture(plat);
 
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX, this.origY + COTE, this.origZ + COTE, 0, 0);
-        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE, 0, 1);
-        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE, 1, 1);
-        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ + COTE, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX, this.origY + COTE, this.origZ, 0, 0);
-        shape.vertex(this.origX, this.origY + COTE, this.origZ + COTE, 1, 0);
-        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ + COTE, 1, 1);
-        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE, 0, 0);
-        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ, 0, 1);
-        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ, 1, 1);
-        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX, this.origY + COTE, this.origZ, 0, 0);
-        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ, 0, 1);
-        shape.vertex(this.origX, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE, 1, 1);
-        shape.vertex(this.origX, this.origY + COTE, this.origZ + COTE, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ + COTE, 0, 0);
-        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ + COTE, 1, 0);
-        shape.vertex(this.origX + COTE, this.origY + COTE, this.origZ, 1, 1);
-        shape.vertex(this.origX + COTE, this.origY + COTE + EPAISSEUR_PLATEAU, this.origZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        return finalShape;
+        return b.finilize(COTE, EPAISSEUR_PLATEAU, COTE);
     }
 
     private PShape creerDossier()
     {
-        PShape finalShape = applet.createShape(GROUP);
+        Boite b = new Boite(applet, this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
 
-        PShape shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 0);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
+        b.texture(plat);
 
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 0);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
+        b.texture(Face.DERRIERE, dossier_avant).texture(Face.DERRIERE, dossier_arriere);
 
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(dossier_avant);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 0);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(dossier_arriere);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 0);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 0);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(plat);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 0);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT, 0, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2 + EPAISSEUR_PLATEAU, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 1);
-        shape.vertex(this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + HAUTEUR, this.origZ + COTE + COTE/RATIO_DOSSIER_DEPASSEMENT, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        return finalShape;
+        return b.finilize(EPAISSEUR_PLATEAU, HAUTEUR*0.25f, COTE + (COTE/RATIO_DOSSIER_DEPASSEMENT)*2);
     }
 }

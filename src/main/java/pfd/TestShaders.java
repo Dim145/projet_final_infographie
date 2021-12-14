@@ -1,5 +1,6 @@
 package pfd;
 
+import pfd.components.Boite;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.opengl.PShader;
@@ -22,12 +23,19 @@ public class TestShaders extends TestsCamera
             new PVector(255, 255, 255)
     };
 
+    Boite[] lights = null;
+
     @Override
     public void setup()
     {
         super.setup();
 
         this.shader = loadShader("shaders/fragment.glsl", "shaders/vert.glsl");
+
+        lights = new Boite[lightPos.length];
+
+        for (int i = 0; i < lights.length; i++)
+            lights[i] = new Boite(this, lightPos[i].x, lightPos[i].y, lightPos[i].z).finilize(10, 10, 10);
     }
 
     @Override
@@ -46,16 +54,8 @@ public class TestShaders extends TestsCamera
 
         super.dessiner();
 
-        for(int i=0; i<lightPos.length; i++)
-        {
-            pushMatrix();
-            noStroke();
-            fill(1, 1, 1);
-            emissive(lightColor[i].x, lightColor[i].y, lightColor[i].z);
-            translate(lightPos[i].x, lightPos[i].y, lightPos[i].z);
-            box(10, 10, 10);
-            popMatrix();
-        }
+        for (Boite light : lights)
+            shape(light);
     }
 
     public static void main(String[] args)

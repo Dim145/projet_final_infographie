@@ -24,94 +24,12 @@ public class Sol extends Composand3D
 
     private PShape creerSol(float finalX, float finalZ)
     {
-        PShape finalShape = this.applet.createShape(GROUP);
+        Boite b = new Boite(this.applet, this.origX, this.origY, this.origZ);
 
-        PShape shape = this.applet.createShape();
+        b.texture(sol);
 
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(sol);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 1, 0);
-        shape.vertex(this.origX, this.origY, this.origZ, 0, 0);
-        shape.vertex(this.origX, this.origY + EPAISSEUR, this.origZ, 0, 1);
-        shape.vertex(this.origX + finalX, this.origY + EPAISSEUR, this.origZ, 1, 1);
-        shape.vertex(this.origX + finalX, this.origY, this.origZ, 1, 0);
-        shape.endShape();
+        b.finilize(finalX, EPAISSEUR, finalZ);
 
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(sol);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 1, 0);
-        shape.vertex(this.origX, this.origY, this.origZ + finalZ, 0, 0);
-        shape.vertex(this.origX, this.origY + EPAISSEUR, this.origZ + finalZ, 0, 1);
-        shape.vertex(this.origX + finalX, this.origY + EPAISSEUR, this.origZ + finalZ, 1, 1);
-        shape.vertex(this.origX + finalX, this.origY, this.origZ + finalZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(sol);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 1, 0);
-        shape.vertex(this.origX, this.origY, this.origZ , 0, 0);
-        shape.vertex(this.origX, this.origY, this.origZ + finalZ , 0, 1);
-        shape.vertex(this.origX + finalX, this.origY, this.origZ + finalZ, 1, 1);
-        shape.vertex(this.origX + finalX, this.origY, this.origZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(sol);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 1, 0);
-        shape.vertex(this.origX + finalX, this.origY + EPAISSEUR, this.origZ + finalZ, 0, 0);
-        shape.vertex(this.origX + finalX, this.origY + EPAISSEUR, this.origZ, 0, 1);
-        shape.vertex(this.origX, this.origY + EPAISSEUR, this.origZ, 1, 1);
-        shape.vertex(this.origX, this.origY + EPAISSEUR, this.origZ + finalZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(sol);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 1, 0);
-        shape.vertex(this.origX, this.origY, this.origZ, 0, 0);
-        shape.vertex(this.origX, this.origY + EPAISSEUR, this.origZ, 0, 1);
-        shape.vertex(this.origX, this.origY + EPAISSEUR, this.origZ + finalZ, 1, 1);
-        shape.vertex(this.origX, this.origY, this.origZ + finalZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        shape = this.applet.createShape();
-        shape.beginShape(QUADS);
-        shape.textureMode(NORMAL);
-        shape.texture(sol);
-        shape.shininess(Utilities.IMAGE_SHININESS);
-        shape.emissive(0, 0, 0);
-        shape.normal(0, 1, 0);
-        shape.vertex(this.origX + finalX, this.origY + EPAISSEUR, this.origZ + finalZ, 0, 0);
-        shape.vertex(this.origX + finalX, this.origY, this.origZ + finalZ, 0, 1);
-        shape.vertex(this.origX + finalX, this.origY, this.origZ, 1, 1);
-        shape.vertex(this.origX + finalX, this.origY + EPAISSEUR, this.origZ, 1, 0);
-        shape.endShape();
-        finalShape.addChild(shape);
-
-        return finalShape;
+        return b;
     }
 }
