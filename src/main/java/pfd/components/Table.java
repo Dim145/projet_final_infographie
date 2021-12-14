@@ -140,7 +140,7 @@ public class Table extends Composand3D
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
-        shape.beginShape();
+        shape.beginShape(QUADS);
         shape.textureMode(NORMAL);
         shape.texture(Utilities.getDefaultImage(applet));
         shape.tint(Utilities.DARK_GRAY);
@@ -168,7 +168,7 @@ public class Table extends Composand3D
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
-        shape.beginShape();
+        shape.beginShape(QUADS);
         shape.textureMode(NORMAL);
         shape.texture(Utilities.getDefaultImage(applet));
         shape.tint(Utilities.DARK_GRAY);
@@ -181,7 +181,7 @@ public class Table extends Composand3D
         finalShape.addChild(shape);
 
         shape = this.applet.createShape();
-        shape.beginShape();
+        shape.beginShape(QUADS);
         shape.textureMode(NORMAL);
         shape.texture(Utilities.getDefaultImage(applet));
         shape.tint(Utilities.DARK_GRAY);

@@ -42,6 +42,10 @@ public class TestShaders extends TestsCamera
                     lightPos[i].x, lightPos[i].y, lightPos[i].z);
         }
 
+        emissive(0, 0, 0);
+
+        super.dessiner();
+
         for(int i=0; i<lightPos.length; i++)
         {
             pushMatrix();
@@ -52,10 +56,6 @@ public class TestShaders extends TestsCamera
             box(10, 10, 10);
             popMatrix();
         }
-
-        emissive(0, 0, 0);
-
-        super.dessiner();
     }
 
     public static void main(String[] args)
