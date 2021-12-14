@@ -66,24 +66,18 @@ public class Boite extends Composand3D
     @Override
     public void setShininess(float shine)
     {
-        super.setShininess(shine);
-
         Arrays.fill(this.shininesss, shine);
     }
 
     @Override
     public void setShininess(int index, float shine)
     {
-        super.setShininess(index, shine);
-
         this.shininesss[index] = shine;
     }
 
     @Override
     public void shininess(float shine)
     {
-        super.shininess(shine);
-
         Arrays.fill(this.shininesss, shine);
     }
 

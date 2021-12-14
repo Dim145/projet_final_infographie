@@ -15,16 +15,16 @@ public class Classe extends Composand3D
         super(applet, 0, 0, 0);
 
         float departBureauxLongeur  = Table.LONGUEUR * 0.75f;
-        float departBureauxLargueur = Table.LARGUEUR * 2;
+        float departBureauxLargueur = Table.LARGUEUR * 3;
 
-        this.largeur = Table.LARGUEUR * 2 * (nbRanger + 1);
+        this.largeur = Table.LARGUEUR + Table.LARGUEUR * 2 * (nbRanger + 1);
         this.longeur = Table.LONGUEUR * nbTableParRanger;
 
         for (int i = 0; i < nbRanger; i++)
             for (int j = 0; j < nbTableParRanger; j++)
                 this.addChild(new Bureau(applet, departBureauxLargueur + (Table.LARGUEUR * 2)*i, Sol.EPAISSEUR, departBureauxLongeur + Table.LONGUEUR*j));
 
-        this.addChild(new Sol(applet, 0, 0, 0, departBureauxLargueur + this.getLargeur() - Table.LARGUEUR, departBureauxLongeur + this.getLongueur()));
+        this.addChild(new Sol(applet, 0, 0, 0, this.getLargeur() + Table.LARGUEUR, departBureauxLongeur + this.getLongueur()));
 
         this.addChild(new Table(applet, this.getLargeur(), Sol.EPAISSEUR, this.getLongueur() - Table.LONGUEUR/2f));
         this.addChild(new Table(applet, this.getLargeur(), Sol.EPAISSEUR, departBureauxLongeur + Table.LONGUEUR * (1/4f)));
@@ -34,7 +34,7 @@ public class Classe extends Composand3D
         this.largeur += Table.LARGUEUR;
         this.longeur += departBureauxLongeur;
 
-        /*Boite[] murs = new Boite[4];
+        Boite[] murs = new Boite[4];
 
         murs[0] = new Boite(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
         murs[1] = new Boite(applet, this.getLargeur(), this.origY, this.getLongueur());
@@ -47,7 +47,7 @@ public class Classe extends Composand3D
         murs[3].finilize(-Sol.EPAISSEUR, HAUTEUR, -this.getLongueur());
 
         for (Boite m : murs)
-            this.addChild(m);*/
+            this.addChild(m);
     }
 
     public float getLongueur()
