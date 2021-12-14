@@ -21,7 +21,7 @@ public class Table extends Composand3D
         this(applet, 0, 0, 0);
     }
 
-    public Table(PApplet applet, int originX, int originY, int originZ)
+    public Table(PApplet applet, float originX, float originY, float originZ)
     {
         super(applet, originX, originY, originZ);
 
@@ -35,7 +35,7 @@ public class Table extends Composand3D
         this.addChild(creerPied(this.origX + LARGUEUR - EPAISSEUR_PLATEUR, this.origZ));
     }
 
-    private PShape creerPied(int baseX, int baseZ)
+    private PShape creerPied(float baseX, float baseZ)
     {
         PShape finalShape = this.applet.createShape(GROUP);
 

@@ -10,7 +10,7 @@ public class Bureau extends Composand3D
         this(applet, 0, 0, 0);
     }
 
-    public Bureau(PApplet applet, int baseX, int baseY, int baseZ)
+    public Bureau(PApplet applet, float baseX, float baseY, float baseZ)
     {
         super(applet, baseX, baseY, baseZ);
 

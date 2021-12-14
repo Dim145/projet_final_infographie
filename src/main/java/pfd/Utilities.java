@@ -12,7 +12,7 @@ public final class Utilities
     public static final int METAL_SHININESS = 10;
     public static final int MAT_SHININESS = METAL_SHININESS * 2;
     public static final int SUPER_MAT_SHININESS = MAT_SHININESS * 2;
-    public static final int IMAGE_SHININESS = 200;
+    public static final int IMAGE_SHININESS = SUPER_MAT_SHININESS * 100;
 
     public static int BLACK = Color.BLACK.getRGB();
     public static int DARK_GRAY = Color.DARK_GRAY.getRGB();
@@ -30,7 +30,7 @@ public final class Utilities
         return defaultImage;
     }
 
-    public static PShape createShape(PApplet applet, int origX, int largueur, int origY, int hauteur, int origZ, int longueur, int tint)
+    public static PShape createShape(PApplet applet, float origX, float largueur, float origY, float hauteur, float origZ, float longueur, int tint)
     {
         if(defaultImage == null)
             defaultImage = applet.loadImage("images/default.png");
@@ -38,7 +38,7 @@ public final class Utilities
         return createShape(applet, origX, largueur, origY, hauteur, origZ, longueur, tint, defaultImage);
     }
 
-    public static PShape createShape(PApplet applet, int origX, int largueur, int origY, int hauteur, int origZ, int longueur, int tint, PImage texture)
+    public static PShape createShape(PApplet applet, float origX, float largueur, float origY, float hauteur, float origZ, float longueur, int tint, PImage texture)
     {
         PShape shape = applet.createShape();
         shape.beginShape(PConstants.QUADS);

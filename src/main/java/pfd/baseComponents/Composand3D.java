@@ -9,15 +9,15 @@ import java.util.List;
 
 public abstract class Composand3D extends PShape
 {
-    protected final int origX;
-    protected int origY;
-    protected int origZ;
+    protected final float origX;
+    protected float origY;
+    protected float origZ;
 
     protected final PApplet applet;
 
     protected final List<PShape> listChild;
 
-    public Composand3D(PApplet applet, int originX, int originY, int originZ)
+    public Composand3D(PApplet applet, float originX, float originY, float originZ)
     {
         super(applet.getGraphics(), GROUP);
 

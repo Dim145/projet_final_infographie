@@ -25,7 +25,7 @@ public class Ordinateur extends Composand3D
 
     private final boolean tourGauche;
 
-    public Ordinateur(PApplet applet, int baseX, int baseY, int baseZ, boolean tourGauche)
+    public Ordinateur(PApplet applet, float baseX, float baseY, float baseZ, boolean tourGauche)
     {
         super(applet, baseX, baseY, baseZ);
 
@@ -59,7 +59,7 @@ public class Ordinateur extends Composand3D
     {
         PShape finalShape = this.applet.createShape(GROUP);
 
-        int baseZ = this.origZ + (this.tourGauche ? HAUTEUR_ECRAN : 0);
+        float baseZ = this.origZ + (this.tourGauche ? HAUTEUR_ECRAN : 0);
 
         PShape shape = applet.createShape();
 
@@ -336,8 +336,8 @@ public class Ordinateur extends Composand3D
 
         PShape shape = this.applet.createShape();
 
-        int baseZ = gauche ? this.origZ : this.origZ + LONGUEUR;
-        int baseX = this.origX;
+        float baseZ = gauche ? this.origZ : this.origZ + LONGUEUR;
+        float baseX = this.origX;
 
         shape.beginShape(QUADS);
         shape.textureMode(NORMAL);
@@ -431,8 +431,8 @@ public class Ordinateur extends Composand3D
 
         PShape shape = this.applet.createShape();
 
-        int baseZ = this.origZ + (tourGauche ? HAUTEUR_ECRAN : 0) + HAUTEUR_ECRAN;
-        int baseX = this.origX + EPAISSEUR * 11;
+        float baseZ = this.origZ + (tourGauche ? HAUTEUR_ECRAN : 0) + HAUTEUR_ECRAN;
+        float baseX = this.origX + EPAISSEUR * 11;
 
         shape.beginShape(QUADS);
         shape.textureMode(NORMAL);

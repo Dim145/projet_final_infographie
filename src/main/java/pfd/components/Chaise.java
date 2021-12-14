@@ -22,7 +22,7 @@ public class Chaise extends Composand3D
         this(applet, 0, 0, 0);
     }
 
-    public Chaise(PApplet applet, int origX, int origY, int origZ)
+    public Chaise(PApplet applet, float origX, float origY, float origZ)
     {
         super(applet, origX, origY, origZ);
 
