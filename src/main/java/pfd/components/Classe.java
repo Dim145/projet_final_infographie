@@ -40,6 +40,8 @@ public class Classe extends Composand3D
         this.largeur += Table.LARGUEUR;
         this.longeur += departBureauxLongeur;
 
+        this.addChild(new TableauTactile(applet, Table.LARGUEUR*2, Sol.EPAISSEUR, -Table.LARGUEUR*1.75f));
+
         Boite[] murs = new Boite[4];
 
         murs[0] = new Boite(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);

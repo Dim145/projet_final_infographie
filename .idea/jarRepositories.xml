@@ -2,6 +2,11 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
+      <option name="id" value="local-maven-repository" />
+      <option name="name" value="local-maven-repository" />
+      <option name="url" value="file://C:\Users\Administrateur\Documents\disque\cours info\4 année (M1)\Semestre 1\InfoGraphie\projet final/src/lib" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />

@@ -19,10 +19,12 @@ public class Ordinateur extends Composand3D
     public static final int LARGEUR_TOUR = EPAISSEUR * 10;
     public static final int LARGEUR_CLAVIER = (int) (LARGEUR_TOUR / 2.25);
 
-
-    private static PImage ecran = null;
     private static PImage clavier = null;
     private static PImage tour_avant = null;
+
+    private static PImage[] images = null;
+
+    private PImage ecran = null;
 
     private final boolean tourGauche;
 
@@ -32,8 +34,17 @@ public class Ordinateur extends Composand3D
 
         this.tourGauche = tourGauche;
 
-        if(ecran == null)
-            ecran = applet.loadImage("images/ordi.png");
+        if(images == null)
+        {
+            images = new PImage[4];
+
+            images[0] = applet.loadImage("images/ordi.png");
+            images[1] = applet.loadImage("images/minecraft.png");
+            images[2] = applet.loadImage("images/processing.png");
+            images[3] = applet.loadImage("images/youtube.png");
+        }
+
+        this.ecran = images[((int) (Math.random() * images.length))];
 
         if(clavier == null)
             clavier = applet.loadImage("images/clavier.png");
