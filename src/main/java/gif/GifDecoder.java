@@ -4,10 +4,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +16,7 @@ public class GifDecoder
     public static final int STATUS_OK = 0;
     public static final int STATUS_FORMAT_ERROR = 1;
     public static final int STATUS_OPEN_ERROR = 2;
-
+    protected static final int MaxStackSize = 4096;
     protected BufferedInputStream in;
     protected int status;
     protected int width;
@@ -47,7 +45,6 @@ public class GifDecoder
     protected boolean transparency = false;
     protected int delay = 0;
     protected int transIndex;
-    protected static final int MaxStackSize = 4096;
     protected short[] prefix;
     protected byte[] suffix;
     protected byte[] pixelStack;
@@ -59,8 +56,7 @@ public class GifDecoder
     {
         delay = -1;
 
-        if ((n >= 0) && (n < frameCount))
-            delay = frames.get(n).delay;
+        if ((n >= 0) && (n < frameCount)) delay = frames.get(n).delay;
 
         return delay;
     }
@@ -86,7 +82,7 @@ public class GifDecoder
                 int n = frameCount - 2;
 
                 if (n > 0) lastImage = getFrame(n - 1);
-                else       lastImage = null;
+                else lastImage = null;
             }
 
             if (lastImage != null)
@@ -177,36 +173,6 @@ public class GifDecoder
         return im;
     }
 
-    public int read(BufferedInputStream is)
-    {
-        init();
-        if (is != null)
-        {
-            in = is;
-            readHeader();
-            if (!err())
-            {
-                readContents();
-                if (frameCount < 0)
-                {
-                    status = STATUS_FORMAT_ERROR;
-                }
-            }
-        }
-        else
-        {
-            status = STATUS_OPEN_ERROR;
-        }
-        try
-        {
-            is.close();
-        }
-        catch (IOException ignored)
-        {}
-
-        return status;
-    }
-
     public void read(InputStream is)
     {
         init();
@@ -233,34 +199,9 @@ public class GifDecoder
             is.close();
         }
         catch (IOException ignored)
-        {}
-
-    }
-
-    public int read(String name)
-    {
-        status = STATUS_OK;
-        try
         {
-            name = name.trim().toLowerCase();
-            if ((name.contains("file:")) || (name.indexOf(":/") > 0))
-            {
-                URL url = new URL(name);
-                in = new BufferedInputStream(url.openStream());
-            }
-            else
-            {
-                in = new BufferedInputStream(new FileInputStream(name));
-            }
-
-            status = read(in);
-        }
-        catch (IOException e)
-        {
-            status = STATUS_OPEN_ERROR;
         }
 
-        return status;
     }
 
     protected void decodeImageData()
@@ -415,7 +356,7 @@ public class GifDecoder
         {
             try
             {
-                int count = 0;
+                int count;
                 while (n < blockSize)
                 {
                     count = in.read(block, n, blockSize - n);
@@ -424,8 +365,7 @@ public class GifDecoder
                 }
             }
             catch (IOException ignored)
-            {
-            }
+            {}
 
             if (n < blockSize) status = STATUS_FORMAT_ERROR;
         }
@@ -463,6 +403,7 @@ public class GifDecoder
                 int r = ((int) c[j++]) & 0xff;
                 int g = ((int) c[j++]) & 0xff;
                 int b = ((int) c[j++]) & 0xff;
+
                 tab[i++] = 0xff000000 | (r << 16) | (g << 8) | b;
             }
         }
@@ -672,14 +613,13 @@ public class GifDecoder
 
     public static class GifFrame
     {
+        public BufferedImage image;
+        public int delay;
+
         public GifFrame(BufferedImage im, int del)
         {
             image = im;
             delay = del;
         }
-
-        public BufferedImage image;
-
-        public int delay;
     }
 }

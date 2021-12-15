@@ -7,16 +7,19 @@ import processing.core.PImage;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 
+/**
+ * selon source venant du repo github: https://github.com/extrapixel/gif-animation
+ */
 public class Gif extends PImage implements PConstants, Runnable
 {
     private final PApplet parent;
     private final PImage[] frames;
     private final int[] delays;
+    private final int repeatSetting;
 
     private boolean play;
     private boolean loop;
     private boolean ignoreRepeatSetting = false;
-    private int repeatSetting = 1;
     private int repeatCount = 0;
     private int currentFrame;
     private int lastJumpTime;
@@ -56,87 +59,15 @@ public class Gif extends PImage implements PConstants, Runnable
         runner.start();
     }
 
-    public void dispose()
-    {
-        stop();
-        runner = null;
-    }
-
-    public void run()
-    {
-        while (Thread.currentThread() == runner)
-        {
-            try
-            {
-                Thread.sleep(this.waitTime);
-            }
-            catch (InterruptedException ignored)
-            {}
-
-            if (play)
-            {
-
-
-                if (parent.millis() - lastJumpTime >= delays[currentFrame])
-                {
-
-
-                    if (currentFrame == frames.length - 1)
-                    {
-
-                        if (loop)
-                        {
-                            jump(0);
-                        }
-                        else if (!ignoreRepeatSetting)
-                        {
-
-
-                            repeatCount++;
-                            if (repeatSetting == 0)
-                            {
-
-                                jump(0);
-                            }
-                            else if (repeatCount == repeatSetting)
-                            {
-
-
-                                stop();
-                            }
-                        }
-                        else
-                        {
-
-
-                            stop();
-                        }
-                    }
-                    else
-                    {
-
-                        jump(currentFrame + 1);
-                    }
-                }
-            }
-        }
-    }
-
     private static InputStream createInputStream(PApplet parent, String filename)
     {
-        InputStream inputStream = parent.createInput(filename);
-        return inputStream;
+        return parent.createInput(filename);
     }
 
     public static PImage[] getPImages(PApplet parent, String filename)
     {
         GifDecoder gifDecoder = createDecoder(parent, filename);
         return extractFrames(gifDecoder);
-    }
-
-    public PImage[] getPImages()
-    {
-        return frames;
     }
 
     private static GifDecoder createDecoder(PApplet parent, String filename)
@@ -172,6 +103,66 @@ public class Gif extends PImage implements PConstants, Runnable
 
         }
         return delays;
+    }
+
+    public void dispose()
+    {
+        stop();
+        runner = null;
+    }
+
+    public void run()
+    {
+        while (Thread.currentThread() == runner)
+        {
+            try
+            {
+                Thread.sleep(this.waitTime);
+            }
+            catch (InterruptedException ignored)
+            {
+            }
+
+            if (play)
+            {
+
+
+                if (parent.millis() - lastJumpTime >= delays[currentFrame])
+                {
+
+
+                    if (currentFrame == frames.length - 1)
+                    {
+
+                        if (loop)
+                        {
+                            jump(0);
+                        }
+                        else if (!ignoreRepeatSetting)
+                        {
+                            repeatCount++;
+                            if (repeatSetting == 0)
+                                jump(0);
+                            else if (repeatCount == repeatSetting)
+                                stop();
+                        }
+                        else
+                        {
+                            stop();
+                        }
+                    }
+                    else
+                    {
+                        jump(currentFrame + 1);
+                    }
+                }
+            }
+        }
+    }
+
+    public PImage[] getPImages()
+    {
+        return frames;
     }
 
     public void ignoreRepeat()
@@ -228,14 +219,12 @@ public class Gif extends PImage implements PConstants, Runnable
 
     public void pause()
     {
-
         play = false;
     }
 
 
     public void stop()
     {
-
         play = false;
         currentFrame = 0;
         repeatCount = 0;
