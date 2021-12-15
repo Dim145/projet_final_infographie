@@ -57,4 +57,32 @@ public abstract class Composand3D extends PShape
             child.translate(x, y, z);
         }
     }
+
+    @Override
+    public void rotate(float angle)
+    {
+        for (PShape p : this.listChild)
+            p.rotate(angle);
+    }
+
+    @Override
+    public void rotateX(float angle)
+    {
+        for (PShape p : this.listChild)
+            p.rotateX(angle);
+    }
+
+    @Override
+    public void rotateY(float angle)
+    {
+        for (PShape p : this.listChild)
+            p.rotateY(angle);
+    }
+
+    @Override
+    public void rotateZ(float angle)
+    {
+        for (PShape p : this.listChild)
+            p.rotateZ(angle);
+    }
 }

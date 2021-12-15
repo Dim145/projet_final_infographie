@@ -3,10 +3,7 @@ package pfd.components;
 import pfd.Utilities;
 import pfd.baseComponents.Composand3D;
 import pfd.baseComponents.Face;
-import processing.core.PApplet;
-import processing.core.PGraphics;
-import processing.core.PImage;
-import processing.core.PShape;
+import processing.core.*;
 
 import java.util.Arrays;
 
@@ -45,6 +42,16 @@ public class Boite extends Composand3D
      */
     private final Integer[] tints;
 
+    /**
+     * 0: droite (dir: -z) <br/>
+     * 1: gauche (dir: z) <br/>
+     * 2: dessou (dir: -y) <br/>
+     * 3: dessu  (dir: y)<br/>
+     * 4: derriere (dir: -x) <br/>
+     * 5: devant (dir: (x)
+     */
+    private final PVector[] normals;
+
     public Boite(PApplet applet, float baseX, float baseY, float baseZ)
     {
         super(applet, baseX, baseY, baseZ);
@@ -52,10 +59,20 @@ public class Boite extends Composand3D
         this.images = new PImage[6];
         this.shininesss = new float[images.length];
         this.tints = new Integer[shininesss.length];
+        this.normals = new PVector[tints.length];
 
         Arrays.fill(this.images, Utilities.getDefaultImage(applet));
         Arrays.fill(this.shininesss, Utilities.IMAGE_SHININESS);
         Arrays.fill(this.tints, -1);
+
+        normal(0, 0, 0);
+
+        normal(Face.DROITE, 0, 0, 1);
+        normal(Face.GAUCHE, 0, 0, -1);
+        normal(Face.DESSOU, 0, 1, 0);
+        normal(Face.DESSU, 0, -1, 0);
+        normal(Face.DERRIERE, 1, 0, 0);
+        normal(Face.DEVANT, -1, 0, 0);
 
         this.finalShape = applet.createShape(GROUP);
         this.addChild(this.finalShape);
@@ -131,7 +148,21 @@ public class Boite extends Composand3D
         return this;
     }
 
+    @Override
+    public void normal(float x, float y, float z)
+    {
+        for (int i = 0; i < normals.length; i++)
+            normals[i] = new PVector(x, y, z);
+    }
 
+    public Boite normal(Face face, float x, float y, float z)
+    {
+        PVector v = this.normals[face.ordinal()];
+
+        this.normals[face.ordinal()] = v.set(x, y, z);
+
+        return this;
+    }
 
     /**
      *
@@ -155,7 +186,7 @@ public class Boite extends Composand3D
             shape.tint(this.tints[Face.DROITE.ordinal()]);
         shape.shininess(this.shininesss[Face.DROITE.ordinal()]);
         shape.emissive(0, 0, 0);
-        shape.normal(0, 0, -1);
+        shape.normal(this.normals[Face.DROITE.ordinal()].x, this.normals[Face.DROITE.ordinal()].y, this.normals[Face.DROITE.ordinal()].z);
         shape.vertex(this.origX, this.origY, this.origZ, 0, 0);
         shape.vertex(this.origX, this.origY + hauteur, this.origZ, 0, 1);
         shape.vertex(this.origX + largeur, this.origY + hauteur, this.origZ, 1, 1);
@@ -172,7 +203,7 @@ public class Boite extends Composand3D
             shape.tint(this.tints[Face.GAUCHE.ordinal()]);
         shape.shininess(this.shininesss[Face.GAUCHE.ordinal()]);
         shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
+        shape.normal(this.normals[Face.GAUCHE.ordinal()].x, this.normals[Face.GAUCHE.ordinal()].y, this.normals[Face.GAUCHE.ordinal()].z);
         shape.vertex(this.origX, this.origY, this.origZ + longeur, 0, 0);
         shape.vertex(this.origX, this.origY + hauteur, this.origZ + longeur, 0, 1);
         shape.vertex(this.origX + largeur, this.origY + hauteur, this.origZ + longeur, 1, 1);
@@ -188,7 +219,7 @@ public class Boite extends Composand3D
             shape.tint(this.tints[Face.DESSOU.ordinal()]);
         shape.shininess(this.shininesss[Face.DESSOU.ordinal()]);
         shape.emissive(0, 0, 0);
-        shape.normal(0, -1, 0);
+        shape.normal(this.normals[Face.DESSOU.ordinal()].x, this.normals[Face.DESSOU.ordinal()].y, this.normals[Face.DESSOU.ordinal()].z);
         shape.vertex(this.origX, this.origY, this.origZ , 0, 0);
         shape.vertex(this.origX, this.origY, this.origZ + longeur , 0, 1);
         shape.vertex(this.origX + largeur, this.origY, this.origZ + longeur, 1, 1);
@@ -204,7 +235,7 @@ public class Boite extends Composand3D
             shape.tint(this.tints[Face.DESSU.ordinal()]);
         shape.shininess(this.shininesss[Face.DESSU.ordinal()]);
         shape.emissive(0, 0, 0);
-        shape.normal(0, 1, 0);
+        shape.normal(this.normals[Face.DESSU.ordinal()].x, this.normals[Face.DESSU.ordinal()].y, this.normals[Face.DESSU.ordinal()].z);
         shape.vertex(this.origX + largeur, this.origY + hauteur, this.origZ + longeur, 1, 1);
         shape.vertex(this.origX + largeur, this.origY + hauteur, this.origZ, 0, 1);
         shape.vertex(this.origX, this.origY + hauteur, this.origZ, 0, 0);
@@ -220,7 +251,7 @@ public class Boite extends Composand3D
             shape.tint(this.tints[Face.DERRIERE.ordinal()]);
         shape.shininess(this.shininesss[Face.DERRIERE.ordinal()]);
         shape.emissive(0, 0, 0);
-        shape.normal(-1, 0, 0);
+        shape.normal(this.normals[Face.DERRIERE.ordinal()].x, this.normals[Face.DERRIERE.ordinal()].y, this.normals[Face.DERRIERE.ordinal()].z);
         shape.vertex(this.origX, this.origY, this.origZ, 0, 0);
         shape.vertex(this.origX, this.origY + hauteur, this.origZ, 0, 1);
         shape.vertex(this.origX, this.origY + hauteur, this.origZ + longeur, 1, 1);
@@ -236,7 +267,7 @@ public class Boite extends Composand3D
             shape.tint(this.tints[Face.DEVANT.ordinal()]);
         shape.shininess(this.shininesss[Face.DEVANT.ordinal()]);
         shape.emissive(0, 0, 0);
-        shape.normal(0, 0, 1);
+        shape.normal(this.normals[Face.DEVANT.ordinal()].x, this.normals[Face.DEVANT.ordinal()].y, this.normals[Face.DEVANT.ordinal()].z);
         shape.vertex(this.origX + largeur, this.origY + hauteur, this.origZ + longeur, 1, 0);
         shape.vertex(this.origX + largeur, this.origY, this.origZ + longeur, 1, 1);
         shape.vertex(this.origX + largeur, this.origY, this.origZ, 0, 1);

@@ -25,6 +25,11 @@ public class Chaise extends Composand3D
 
     public Chaise(PApplet applet, float origX, float origY, float origZ)
     {
+        this(applet, origX, origY, origZ, false);
+    }
+
+    public Chaise(PApplet applet, float origX, float origY, float origZ, boolean sensInverser)
+    {
         super(applet, origX, origY, origZ);
 
         if(plat == null)
@@ -37,11 +42,11 @@ public class Chaise extends Composand3D
             dossier_avant = applet.loadImage("images/dossier.png");
 
         this.addChild(creerPlateau());
-        this.addChild(creerDossier());
-        this.addChild(creerPied(origX + 0.2f, origZ + 0.2f, false));
-        this.addChild(creerPied(origX + 0.2f, origZ + 0.2f + COTE - EPAISSEUR_PLATEAU, false));
-        this.addChild(creerPied(origX + 0.2f + COTE - EPAISSEUR_PLATEAU, origZ - 0.2f, true));
-        this.addChild(creerPied(origX + 0.2f + COTE - EPAISSEUR_PLATEAU, origZ + 0.2f + COTE - EPAISSEUR_PLATEAU, true));
+        this.addChild(creerDossier(sensInverser));
+        this.addChild(creerPied(origX + 0.2f, origZ + 0.2f, sensInverser));
+        this.addChild(creerPied(origX + 0.2f, origZ + 0.2f + COTE - EPAISSEUR_PLATEAU, sensInverser));
+        this.addChild(creerPied(origX + 0.2f + COTE - EPAISSEUR_PLATEAU, origZ - 0.2f, !sensInverser));
+        this.addChild(creerPied(origX + 0.2f + COTE - EPAISSEUR_PLATEAU, origZ + 0.2f + COTE - EPAISSEUR_PLATEAU, !sensInverser));
     }
 
     private PShape creerPied(float baseX, float baseZ, boolean arriere)
@@ -62,9 +67,9 @@ public class Chaise extends Composand3D
         return b.finilize(COTE, EPAISSEUR_PLATEAU, COTE);
     }
 
-    private PShape creerDossier()
+    private PShape creerDossier(boolean sensInverser)
     {
-        Boite b = new Boite(applet, this.origX + COTE - EPAISSEUR_PLATEAU *2, this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
+        Boite b = new Boite(applet, this.origX + (sensInverser ? EPAISSEUR_PLATEAU : COTE - EPAISSEUR_PLATEAU *2), this.origY + COTE + COTE/2f, this.origZ - COTE/RATIO_DOSSIER_DEPASSEMENT);
 
         b.texture(plat);
 

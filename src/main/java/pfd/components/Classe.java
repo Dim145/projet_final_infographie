@@ -1,6 +1,7 @@
 package pfd.components;
 
 import pfd.baseComponents.Composand3D;
+import pfd.baseComponents.Face;
 import processing.core.PApplet;
 
 public class Classe extends Composand3D
@@ -29,7 +30,12 @@ public class Classe extends Composand3D
         this.addChild(new Table(applet, this.getLargeur(), Sol.EPAISSEUR, this.getLongueur() - Table.LONGUEUR/2f));
         this.addChild(new Table(applet, this.getLargeur(), Sol.EPAISSEUR, departBureauxLongeur + Table.LONGUEUR * (1/4f)));
 
+        // bureau prof
         this.addChild(new Table(applet, departBureauxLargueur - Table.LARGUEUR, Sol.EPAISSEUR, departBureauxLongeur + Table.LONGUEUR*(3/4f)));
+
+        Chaise chaiseProf = new Chaise(applet, departBureauxLargueur - Table.LARGUEUR * 1.5f, Sol.EPAISSEUR, departBureauxLongeur + Table.LONGUEUR*1.25f - Chaise.COTE/2f, true);
+
+        this.addChild(chaiseProf);
 
         this.largeur += Table.LARGUEUR;
         this.longeur += departBureauxLongeur;
@@ -40,6 +46,9 @@ public class Classe extends Composand3D
         murs[1] = new Boite(applet, this.getLargeur(), this.origY, this.getLongueur());
         murs[2] = new Boite(applet, this.getLargeur(), this.origY, this.origZ);
         murs[3] = new Boite(applet, this.origX, this.origY, this.getLongueur());
+
+        murs[3].normal(Face.DERRIERE, 1, 0, 0);
+        murs[3].normal(Face.DEVANT, -1, 0, 0);
 
         murs[0].finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR, Sol.EPAISSEUR);
         murs[1].finilize(-this.getLargeur() - Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
