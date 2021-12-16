@@ -85,4 +85,19 @@ public abstract class Composand3D extends PShape
         for (PShape p : this.listChild)
             p.rotateZ(angle);
     }
+
+    public float getOrigX()
+    {
+        return origX;
+    }
+
+    public float getOrigY()
+    {
+        return origY;
+    }
+
+    public float getOrigZ()
+    {
+        return origZ;
+    }
 }

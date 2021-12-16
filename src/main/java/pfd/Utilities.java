@@ -16,8 +16,9 @@ public final class Utilities
 
     public static int BLACK = Color.BLACK.getRGB();
     public static int DARK_GRAY = Color.DARK_GRAY.getRGB();
+    public static int LIGHT_BLACK = new Color(24, 24, 24).getRGB();
     public static int CYAN = new Color(0, 240, 228).getRGB();
-    public static int WHITE = Color.WHITE.getRGB();
+    public static int DARK_WHITE = DARK_GRAY*2;
     public static int RED = Color.RED.getRGB();
 
     private static PImage defaultImage = null;

@@ -24,7 +24,8 @@ public class Ordinateur extends Composand3D
 
     private static PImage[] images = null;
 
-    private PImage ecran = null;
+    private final PImage ecran;
+    private int selectedIndex;
 
     private final boolean tourGauche;
 
@@ -44,7 +45,9 @@ public class Ordinateur extends Composand3D
             images[3] = applet.loadImage("images/youtube.png");
         }
 
-        this.ecran = images[((int) (Math.random() * images.length))];
+        selectedIndex = ((int) (Math.random() * images.length));
+
+        this.ecran = images[selectedIndex];
 
         if(clavier == null)
             clavier = applet.loadImage("images/clavier.png");
@@ -78,7 +81,8 @@ public class Ordinateur extends Composand3D
 
         b.tint(Face.DERRIERE, Utilities.DARK_GRAY);
 
-        b.tint(Face.DEVANT, null).texture(Face.DEVANT, ecran).setShininess(Face.DEVANT.ordinal(), Utilities.IMAGE_SHININESS*2);
+        // images 1 et 2 trop blanches. Pour evité cela, mise en place d'un filtre gris
+        b.tint(Face.DEVANT, selectedIndex == 1 || selectedIndex == 2 ? Utilities.DARK_WHITE : null).texture(Face.DEVANT, ecran).setShininess(Face.DEVANT.ordinal(), Utilities.IMAGE_SHININESS*2);
 
         return b.finilize(EPAISSEUR, LARGUEUR, LONGUEUR);
     }

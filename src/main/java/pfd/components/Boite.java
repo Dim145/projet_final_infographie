@@ -52,6 +52,10 @@ public class Boite extends Composand3D
      */
     private final PVector[] normals;
 
+    private float hauteur;
+    private float largeur;
+    private float longeur;
+
     public Boite(PApplet applet, float baseX, float baseY, float baseZ)
     {
         super(applet, baseX, baseY, baseZ);
@@ -177,6 +181,10 @@ public class Boite extends Composand3D
      */
     public Boite finilize(float largeur, float hauteur, float longeur)
     {
+        this.hauteur = hauteur;
+        this.largeur = largeur;
+        this.longeur = longeur;
+
         PShape shape = this.applet.createShape();
 
         shape.beginShape(QUADS);
@@ -287,5 +295,20 @@ public class Boite extends Composand3D
             this.finilize(10, 10, 10);
 
         super.draw(g);
+    }
+
+    public float getHauteur()
+    {
+        return hauteur;
+    }
+
+    public float getLargeur()
+    {
+        return largeur;
+    }
+
+    public float getLongeur()
+    {
+        return longeur;
     }
 }
