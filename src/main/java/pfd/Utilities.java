@@ -20,6 +20,7 @@ public final class Utilities
     public static int CYAN = new Color(0, 240, 228).getRGB();
     public static int DARK_WHITE = DARK_GRAY*2;
     public static int RED = Color.RED.getRGB();
+    public static int VERT_FONCER = new Color(9, 73, 9).getRGB();
 
     private static PImage defaultImage = null;
 

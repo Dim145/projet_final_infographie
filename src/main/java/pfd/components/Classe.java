@@ -59,6 +59,8 @@ public class Classe extends Composand3D
 
         for (Boite m : murs)
             this.addChild(m);
+
+        this.addChild(new TableauCraie(applet, this.origX, this.origY + HAUTEUR/3, this.origZ + longeur/4, longeur/2));
     }
 
     public float getLongueur()
