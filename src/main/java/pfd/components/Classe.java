@@ -1,5 +1,7 @@
 package pfd.components;
 
+import jdk.jshell.execution.Util;
+import pfd.Utilities;
 import pfd.baseComponents.Composand3D;
 import pfd.baseComponents.Face;
 import processing.core.PApplet;
@@ -51,6 +53,11 @@ public class Classe extends Composand3D
 
         murs[3].normal(Face.DERRIERE, 1, 0, 0);
         murs[3].normal(Face.DEVANT, -1, 0, 0);
+
+        murs[0].tint(Utilities.BEIGE_BIZZARE);
+        murs[1].tint(Utilities.BEIGE_BIZZARE);
+        murs[2].tint(Utilities.BEIGE_BIZZARE);
+        murs[3].tint(Utilities.BEIGE_BIZZARE);
 
         murs[0].finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR, Sol.EPAISSEUR);
         murs[1].finilize(-this.getLargeur() - Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
