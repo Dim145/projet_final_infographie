@@ -22,6 +22,10 @@ public final class Utilities
     public static int RED = Color.RED.getRGB();
     public static int VERT_FONCER = new Color(9, 73, 9).getRGB();
     public static int BEIGE_BIZZARE = new Color(236, 227, 196).getRGB();
+    public static int LIGHT_GRAY = Color.LIGHT_GRAY.getRGB();
+
+    public static float DEFAULT_PHI = 404.55f;
+    public static float DEFAULT_THETA = -360.9f;
 
     private static PImage defaultImage = null;
 

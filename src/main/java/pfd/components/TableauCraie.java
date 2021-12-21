@@ -18,6 +18,7 @@ public class TableauCraie extends Composand3D
         this.longueur = longueur;
 
         this.addChild(creerTab());
+        this.addChild(creerRebord());
     }
 
     private Boite creerTab()
@@ -27,5 +28,14 @@ public class TableauCraie extends Composand3D
         b.tint(Utilities.VERT_FONCER);
 
         return b.finilize(EPAISSEUR, HAUTEUR, this.longueur);
+    }
+
+    private Boite creerRebord()
+    {
+        Boite b = new Boite(this.applet, this.origX, this.origY, this.origZ);
+
+        b.tint(Utilities.LIGHT_GRAY);
+
+        return b.finilize(EPAISSEUR, EPAISSEUR/2f, this.longueur);
     }
 }

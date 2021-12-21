@@ -1,5 +1,6 @@
 package pfd.baseComponents;
 
+import pfd.Utilities;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
@@ -14,10 +15,10 @@ public abstract class BaseProcessing extends PApplet
     protected float rayon = 500;
     protected int taille = 50;
 
-    protected float phi = 0;
+    protected float phi = Utilities.DEFAULT_PHI;
 
     // Angle de la camera avec le sujet sur le plan XZ.
-    protected float theta = 0;
+    protected float theta = Utilities.DEFAULT_THETA;
 
     // Position cartésienne de la camera
     // calculée à partir du rayon et de l'angle.
@@ -51,7 +52,7 @@ public abstract class BaseProcessing extends PApplet
         updateCamera();
         camera(camX, camY, camZ,            // observateur : position de la camera.
                 centerX, centerY, centerZ,  // sujet : position du sujet visé.
-                0, -1, 0);          // orientation : vecteur "haut".
+                0, -1, 0);         // orientation : vecteur "haut".
 
         dessiner();
     }
