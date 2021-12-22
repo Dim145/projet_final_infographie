@@ -56,6 +56,8 @@ public class Boite extends Composand3D
     private float largeur;
     private float longeur;
 
+    private boolean noStroke;
+
     public Boite(PApplet applet, float baseX, float baseY, float baseZ)
     {
         super(applet, baseX, baseY, baseZ);
@@ -64,6 +66,7 @@ public class Boite extends Composand3D
         this.shininesss = new float[images.length];
         this.tints = new Integer[shininesss.length];
         this.normals = new PVector[tints.length];
+        this.noStroke = true;
 
         Arrays.fill(this.images, Utilities.getDefaultImage(applet));
         Arrays.fill(this.shininesss, Utilities.IMAGE_SHININESS);
@@ -82,6 +85,26 @@ public class Boite extends Composand3D
         this.addChild(this.finalShape);
 
         this.isFinilise = false;
+    }
+
+    @Override
+    public void noStroke()
+    {
+        this.noStroke = true;
+    }
+
+    public Boite addStroke()
+    {
+        this.noStroke = false;
+
+        return this;
+    }
+
+    public Boite setNoStroke(boolean noStroke)
+    {
+        this.noStroke = noStroke;
+
+        return this;
     }
 
     @Override
@@ -188,6 +211,8 @@ public class Boite extends Composand3D
         PShape shape = this.applet.createShape();
 
         shape.beginShape(QUADS);
+        if(noStroke)
+            shape.noStroke();
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DROITE.ordinal()]);
         if(this.tints[Face.DROITE.ordinal()] != null)
@@ -205,6 +230,8 @@ public class Boite extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
+        if(noStroke)
+            shape.noStroke();
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.GAUCHE.ordinal()]);
         if(this.tints[Face.GAUCHE.ordinal()] != null)
@@ -221,6 +248,8 @@ public class Boite extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
+        if(noStroke)
+            shape.noStroke();
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DESSOU.ordinal()]);
         if(this.tints[Face.DESSOU.ordinal()] != null)
@@ -237,6 +266,8 @@ public class Boite extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
+        if(noStroke)
+            shape.noStroke();
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DESSU.ordinal()]);
         if(this.tints[Face.DESSU.ordinal()] != null)
@@ -253,6 +284,8 @@ public class Boite extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
+        if(noStroke)
+            shape.noStroke();
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DERRIERE.ordinal()]);
         if(this.tints[Face.DERRIERE.ordinal()] != null)
@@ -269,6 +302,8 @@ public class Boite extends Composand3D
 
         shape = this.applet.createShape();
         shape.beginShape(QUADS);
+        if(noStroke)
+            shape.noStroke();
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DEVANT.ordinal()]);
         if(this.tints[Face.DEVANT.ordinal()] != null)

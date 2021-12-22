@@ -4,6 +4,7 @@ import pfd.baseComponents.BaseProcessing;
 import pfd.components.Boite;
 import pfd.components.Classe;
 
+import pfd.components.Curseur;
 import processing.core.*;
 import processing.event.Event;
 import processing.event.KeyEvent;
@@ -24,6 +25,7 @@ public class TestsCamera extends BaseProcessing
 
     private final HashMap<Character, KeyEvent> keysEvents = new HashMap<>();
     private PMatrix3D baseMat;
+    private Curseur curseur;
 
     @Override
     public void setup()
@@ -49,8 +51,7 @@ public class TestsCamera extends BaseProcessing
         axis.draw(this);
 
         shape(classe);
-
-        shape(new Boite(this, centerX - 5, centerY - 5, centerZ - 5).finilize(10, 10, 10));
+        shape(new Curseur(this, centerX, centerY, centerZ));
 
         for (KeyEvent event : this.keysEvents.values())
         {
@@ -60,14 +61,14 @@ public class TestsCamera extends BaseProcessing
             {
                 int mult = (keyCode == VK_SHIFT ? -1 : 1);
 
-                centerY += 10 * mult;
+                centerY += Utilities.PAS_DEPLACEMENT * mult;
             }
 
             if(event.getKey() == 'q' || keyCode == VK_D)
             {
                 int mult = (event.getKey() == 'q' ? -1 : 1);
 
-                centerZ += 10 * mult;
+                centerZ += Utilities.PAS_DEPLACEMENT * mult;
             }
 
             if(event.isControlDown() && keyCode == VK_R)
@@ -84,7 +85,7 @@ public class TestsCamera extends BaseProcessing
             {
                 int mult = (event.getKey() == 'z' ? -1 : 1);
 
-                centerX += 10 * mult;
+                centerX += Utilities.PAS_DEPLACEMENT * mult;
             }
         }
 

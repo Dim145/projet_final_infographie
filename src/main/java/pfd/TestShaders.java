@@ -74,7 +74,7 @@ public class TestShaders extends TestsCamera
         lights = new Boite[lightPos.length];
 
         for (int i = 0; i < lights.length; i++)
-            lights[i] = new Boite(this, lightPos[i].x, lightPos[i].y-10, lightPos[i].z).finilize(10, 10, 10);
+            lights[i] = new Boite(this, lightPos[i].x, lightPos[i].y-10, lightPos[i].z).addStroke().finilize(10, 10, 10);
     }
 
     @Override
@@ -97,6 +97,7 @@ public class TestShaders extends TestsCamera
         super.dessiner();
     }
 
+    //maven compile exec:java -Dfile.encoding=utf-8 -Dexec.mainClass=pfd.TestShaders
     public static void main(String[] args)
     {
         PApplet.main(TestShaders.class.getName());

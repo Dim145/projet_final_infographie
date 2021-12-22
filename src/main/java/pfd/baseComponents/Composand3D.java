@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class Composand3D extends PShape
 {
-    protected final float origX;
+    protected float origX;
     protected float origY;
     protected float origZ;
 
@@ -99,5 +99,20 @@ public abstract class Composand3D extends PShape
     public float getOrigZ()
     {
         return origZ;
+    }
+
+    public void setOrigX(float x)
+    {
+        origX = x;
+    }
+
+    public void setOrigY(float y)
+    {
+        origY = y;
+    }
+
+    public void setOrigZ(float z)
+    {
+        origZ = z;
     }
 }

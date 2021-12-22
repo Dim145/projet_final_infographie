@@ -1,6 +1,5 @@
 package pfd.components;
 
-import jdk.jshell.execution.Util;
 import pfd.Utilities;
 import pfd.baseComponents.Composand3D;
 import pfd.baseComponents.Face;
@@ -44,20 +43,15 @@ public class Classe extends Composand3D
 
         this.addChild(new TableauTactile(applet, Table.LARGUEUR*2, Sol.EPAISSEUR, -Table.LARGUEUR*1.75f));
 
-        Boite[] murs = new Boite[4];
+        Boite[] murs = new Mur[4];
 
-        murs[0] = new Boite(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
-        murs[1] = new Boite(applet, this.getLargeur(), this.origY, this.getLongueur());
-        murs[2] = new Boite(applet, this.getLargeur(), this.origY, this.origZ);
-        murs[3] = new Boite(applet, this.origX, this.origY, this.getLongueur());
+        murs[0] = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
+        murs[1] = new Mur(applet, this.getLargeur(), this.origY, this.getLongueur());
+        murs[2] = new Mur(applet, this.getLargeur(), this.origY, this.origZ);
+        murs[3] = new Mur(applet, this.origX, this.origY, this.getLongueur());
 
         murs[3].normal(Face.DERRIERE, 1, 0, 0);
         murs[3].normal(Face.DEVANT, -1, 0, 0);
-
-        murs[0].tint(Utilities.BEIGE_BIZZARE);
-        murs[1].tint(Utilities.BEIGE_BIZZARE);
-        murs[2].tint(Utilities.BEIGE_BIZZARE);
-        murs[3].tint(Utilities.BEIGE_BIZZARE);
 
         murs[0].finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR, Sol.EPAISSEUR);
         murs[1].finilize(-this.getLargeur() - Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);

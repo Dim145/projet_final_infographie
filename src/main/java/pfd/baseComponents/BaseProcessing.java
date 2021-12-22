@@ -47,6 +47,7 @@ public abstract class BaseProcessing extends PApplet
     @Override
     public final void draw()
     {
+        noStroke();
         background(0);
 
         updateCamera();
