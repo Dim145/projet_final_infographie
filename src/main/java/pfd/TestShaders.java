@@ -91,10 +91,10 @@ public class TestShaders extends TestsCamera
 
         emissive(0, 0, 0);
 
-        super.dessiner();
-
         for (Boite light : lights)
             shape(light);
+
+        super.dessiner();
     }
 
     public static void main(String[] args)

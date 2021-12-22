@@ -32,10 +32,10 @@ public class TableauCraie extends Composand3D
 
     private Boite creerRebord()
     {
-        Boite b = new Boite(this.applet, this.origX, this.origY, this.origZ);
+        Boite b = new Boite(this.applet, this.origX, this.origY - 0.5f, this.origZ+0.5f);
 
         b.tint(Utilities.LIGHT_GRAY);
 
-        return b.finilize(EPAISSEUR, EPAISSEUR/2f, this.longueur);
+        return b.finilize(EPAISSEUR*2, EPAISSEUR/2f, this.longueur - 1f);
     }
 }

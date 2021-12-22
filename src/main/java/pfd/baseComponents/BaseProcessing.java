@@ -59,9 +59,9 @@ public abstract class BaseProcessing extends PApplet
 
     void updateCamera()
     {
-        camX = rayon * cos(radians(phi)) * cos(radians(theta)) + X;
-        camY = rayon * sin(radians(phi)) + Y;
-        camZ = rayon * cos(radians(phi)) * sin(radians(theta)) + Z;
+        camX = rayon * cos(radians(phi)) * cos(radians(theta)) + X + centerX;
+        camY = rayon * sin(radians(phi)) + Y + centerY;
+        camZ = rayon * cos(radians(phi)) * sin(radians(theta)) + Z + centerZ;
     }
 
     @Override
