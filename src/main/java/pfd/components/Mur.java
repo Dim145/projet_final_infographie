@@ -25,7 +25,11 @@ public class Mur extends Boite
         if(startY <= this.origY) startY = this.origY;
         if(startZ <= this.origZ) startZ = this.origZ;
 
-        this.fenetres.add(new Boite(applet, startX, startY, startZ).setNoStroke(addFenetre).finilize(largeur, hauteur, longueur));
+        Boite b = new Boite(applet, startX, startY, startZ).setNoStroke(addFenetre);
+
+        b.tint(Utilities.VERT_FONCER, 127f);
+
+        this.fenetres.add(b.finilize(largeur, hauteur, longueur));
 
         return this;
     }
@@ -36,10 +40,51 @@ public class Mur extends Boite
         if(this.fenetres.size() == 0)
             return super.finilize(largeur, hauteur, longeur);
 
-        Boite fenetre = this.fenetres.get(0);
+        if(longeur > largeur)
+            this.addFenetreAxeZ(largeur, hauteur, longeur);
+        else
+            this.addFenetreAxeX(largeur, hauteur, longeur);
 
-        this.addChild(new Boite(applet, this.origX, this.origY, this.origZ).finilize(fenetre.getOrigX(), hauteur, longeur));
+        this.isFinilise = true;
 
         return this;
+    }
+
+    private void addFenetreAxeZ(float largeur, float hauteur, float longeur)
+    {
+        Boite fenetre = this.fenetres.get(0);
+
+        this.addChild(fenetre);
+
+        this.addChild(new Boite(applet, this.origX, this.origY, this.origZ)
+                .finilize(largeur, fenetre.getOrigY(), longeur));
+
+        this.addChild(new Boite(applet, this.origX, fenetre.getOrigY(), fenetre.getOrigZ() + fenetre.getLongeur())
+                .finilize(largeur, hauteur - fenetre.getOrigY(), longeur - (fenetre.getOrigZ()+fenetre.getLongeur())));
+
+        this.addChild(new Boite(applet, this.origX, fenetre.getOrigY() + fenetre.getHauteur(), this.origZ)
+                .finilize(largeur, hauteur - (fenetre.getOrigY() + fenetre.getHauteur()), fenetre.getOrigZ() + fenetre.getLongeur()));
+
+        this.addChild(new Boite(applet, this.origX, fenetre.getOrigY(), this.origZ)
+                .finilize(largeur, fenetre.getHauteur(), fenetre.getOrigZ()));
+    }
+
+    private void addFenetreAxeX(float largeur, float hauteur, float longeur)
+    {
+        Boite fenetre = this.fenetres.get(0);
+
+        this.addChild(fenetre);
+
+        this.addChild(new Boite(applet, this.origX, this.origY, this.origZ)
+                .finilize(largeur, fenetre.getOrigY(), longeur));
+
+        this.addChild(new Boite(applet, fenetre.getOrigX() + fenetre.getLargeur(), fenetre.getOrigY(), this.origZ)
+                .finilize(largeur - (fenetre.getOrigX() + fenetre.getLargeur()), hauteur - fenetre.getOrigY(), longeur));
+
+        this.addChild(new Boite(applet, this.origX, fenetre.getOrigY() + fenetre.getHauteur(), this.origZ)
+                .finilize(fenetre.getOrigX() + fenetre.getLargeur(), hauteur - (fenetre.getOrigY() + fenetre.getHauteur()), longeur));
+
+        this.addChild(new Boite(applet, this.origX, fenetre.getOrigY(), this.origZ)
+                .finilize(fenetre.getOrigX(), fenetre.getHauteur(), longeur));
     }
 }

@@ -10,7 +10,8 @@ import java.util.Arrays;
 public class Boite extends Composand3D
 {
     private final PShape finalShape;
-    private boolean isFinilise;
+
+    protected boolean isFinilise;
 
     /**
      * 0: droite (dir: -z) <br/>
@@ -52,6 +53,16 @@ public class Boite extends Composand3D
      */
     private final PVector[] normals;
 
+    /**
+     * 0: droite (dir: -z) <br/>
+     * 1: gauche (dir: z) <br/>
+     * 2: dessou (dir: -y) <br/>
+     * 3: dessu  (dir: y)<br/>
+     * 4: derriere (dir: -x) <br/>
+     * 5: devant (dir: (x)
+     */
+    private final Float[] alphas;
+
     private float hauteur;
     private float largeur;
     private float longeur;
@@ -66,11 +77,13 @@ public class Boite extends Composand3D
         this.shininesss = new float[images.length];
         this.tints = new Integer[shininesss.length];
         this.normals = new PVector[tints.length];
+        this.alphas = new Float[tints.length];
         this.noStroke = true;
 
         Arrays.fill(this.images, Utilities.getDefaultImage(applet));
         Arrays.fill(this.shininesss, Utilities.IMAGE_SHININESS);
         Arrays.fill(this.tints, -1);
+        Arrays.fill(this.alphas, 255f);
 
         normal(0, 0, 0);
 
@@ -175,6 +188,21 @@ public class Boite extends Composand3D
         return this;
     }
 
+    public Boite setAlpha(Face face, float alpha)
+    {
+        this.alphas[face.ordinal()] = alpha;
+
+        return this;
+    }
+
+    @Override
+    public void tint(int rgb, float alpha)
+    {
+        Arrays.fill(this.alphas, alpha);
+
+        this.tint(rgb);
+    }
+
     @Override
     public void normal(float x, float y, float z)
     {
@@ -216,7 +244,7 @@ public class Boite extends Composand3D
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DROITE.ordinal()]);
         if(this.tints[Face.DROITE.ordinal()] != null)
-            shape.tint(this.tints[Face.DROITE.ordinal()]);
+            shape.tint(this.tints[Face.DROITE.ordinal()], this.alphas[Face.DROITE.ordinal()]);
         shape.shininess(this.shininesss[Face.DROITE.ordinal()]);
         shape.emissive(0, 0, 0);
         shape.normal(this.normals[Face.DROITE.ordinal()].x, this.normals[Face.DROITE.ordinal()].y, this.normals[Face.DROITE.ordinal()].z);
@@ -235,7 +263,7 @@ public class Boite extends Composand3D
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.GAUCHE.ordinal()]);
         if(this.tints[Face.GAUCHE.ordinal()] != null)
-            shape.tint(this.tints[Face.GAUCHE.ordinal()]);
+            shape.tint(this.tints[Face.GAUCHE.ordinal()], this.alphas[Face.GAUCHE.ordinal()]);
         shape.shininess(this.shininesss[Face.GAUCHE.ordinal()]);
         shape.emissive(0, 0, 0);
         shape.normal(this.normals[Face.GAUCHE.ordinal()].x, this.normals[Face.GAUCHE.ordinal()].y, this.normals[Face.GAUCHE.ordinal()].z);
@@ -253,7 +281,7 @@ public class Boite extends Composand3D
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DESSOU.ordinal()]);
         if(this.tints[Face.DESSOU.ordinal()] != null)
-            shape.tint(this.tints[Face.DESSOU.ordinal()]);
+            shape.tint(this.tints[Face.DESSOU.ordinal()], this.alphas[Face.DESSOU.ordinal()]);
         shape.shininess(this.shininesss[Face.DESSOU.ordinal()]);
         shape.emissive(0, 0, 0);
         shape.normal(this.normals[Face.DESSOU.ordinal()].x, this.normals[Face.DESSOU.ordinal()].y, this.normals[Face.DESSOU.ordinal()].z);
@@ -271,7 +299,7 @@ public class Boite extends Composand3D
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DESSU.ordinal()]);
         if(this.tints[Face.DESSU.ordinal()] != null)
-            shape.tint(this.tints[Face.DESSU.ordinal()]);
+            shape.tint(this.tints[Face.DESSU.ordinal()], this.alphas[Face.DESSU.ordinal()]);
         shape.shininess(this.shininesss[Face.DESSU.ordinal()]);
         shape.emissive(0, 0, 0);
         shape.normal(this.normals[Face.DESSU.ordinal()].x, this.normals[Face.DESSU.ordinal()].y, this.normals[Face.DESSU.ordinal()].z);
@@ -289,7 +317,7 @@ public class Boite extends Composand3D
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DERRIERE.ordinal()]);
         if(this.tints[Face.DERRIERE.ordinal()] != null)
-            shape.tint(this.tints[Face.DERRIERE.ordinal()]);
+            shape.tint(this.tints[Face.DERRIERE.ordinal()], this.alphas[Face.DERRIERE.ordinal()]);
         shape.shininess(this.shininesss[Face.DERRIERE.ordinal()]);
         shape.emissive(0, 0, 0);
         shape.normal(this.normals[Face.DERRIERE.ordinal()].x, this.normals[Face.DERRIERE.ordinal()].y, this.normals[Face.DERRIERE.ordinal()].z);
@@ -307,7 +335,7 @@ public class Boite extends Composand3D
         shape.textureMode(NORMAL);
         shape.texture(this.images[Face.DEVANT.ordinal()]);
         if(this.tints[Face.DEVANT.ordinal()] != null)
-            shape.tint(this.tints[Face.DEVANT.ordinal()]);
+            shape.tint(this.tints[Face.DEVANT.ordinal()], this.alphas[Face.DEVANT.ordinal()]);
         shape.shininess(this.shininesss[Face.DEVANT.ordinal()]);
         shape.emissive(0, 0, 0);
         shape.normal(this.normals[Face.DEVANT.ordinal()].x, this.normals[Face.DEVANT.ordinal()].y, this.normals[Face.DEVANT.ordinal()].z);

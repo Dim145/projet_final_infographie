@@ -11,7 +11,7 @@ public class Curseur extends Boite
     {
         super(applet, origX - TAILLE/2f, origY - TAILLE/2f, origZ - TAILLE/2f);
 
-        this.tint(Utilities.CYAN);
+        this.tint(Utilities.RED);
 
         this.finilize(TAILLE, TAILLE, TAILLE);
     }
