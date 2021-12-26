@@ -19,15 +19,44 @@ public class Mur extends Boite
         this.tint(Utilities.BEIGE_BIZZARE);
     }
 
-    public Mur addTrou(float startX, float startY, float startZ, float largeur, float hauteur, float longueur, boolean addFenetre)
+    /**
+     * Ajoute un "trou" au mur. Couleur et transparence modifiable. <br/>
+     * </br>
+     * Toutes les coordonnées sont relative au mur. Si startX = 50, la valeur X de la fenetre seras de "origX du mur + 50"
+     * @param startX coordonnée X par rapport au mur
+     * @param startY coordonnée Y par rapport au mur
+     * @param startZ coordonnée Z par rapport au mur
+     * @param largeur largeur du trou.
+     * @param hauteur hauteur du trou.
+     * @param longueur hauteur du trou.
+     * @param noStroke Mettre les bordures sur la fenêtre.
+     * @return this
+     */
+    public Mur addTrou(float startX, float startY, float startZ, float largeur, float hauteur, float longueur, boolean noStroke)
     {
-        if(startX <= this.origX) startX = this.origX;
-        if(startY <= this.origY) startY = this.origY;
-        if(startZ <= this.origZ) startZ = this.origZ;
+        return addTrou(startX, startY, startZ, largeur, hauteur, longueur, noStroke, Utilities.VERT_FONCER, 127f);
+    }
 
-        Boite b = new Boite(applet, startX, startY, startZ).setNoStroke(addFenetre);
+    /**
+     * Ajoute un "trou" au mur. Couleur et transparence modifiable. <br/>
+     * </br>
+     * Toutes les coordonnées sont relative au mur. Si startX = 50, la valeur X de la fenetre seras de "origX du mur + 50"
+     * @param startX coordonnée X par rapport au mur
+     * @param startY coordonnée Y par rapport au mur
+     * @param startZ coordonnée Z par rapport au mur
+     * @param largeur largeur du trou.
+     * @param hauteur hauteur du trou.
+     * @param longueur hauteur du trou.
+     * @param noStroke Mettre les bordures sur la fenêtre.
+     * @param color couleur de la fenêtre.
+     * @param alpha transparence de la fenêtre.
+     * @return this
+     */
+    public Mur addTrou(float startX, float startY, float startZ, float largeur, float hauteur, float longueur, boolean noStroke, int color, float alpha)
+    {
+        Boite b = new Boite(applet, this.origX + startX, this.origY + startY, this.origZ + startZ).setNoStroke(noStroke);
 
-        b.tint(Utilities.VERT_FONCER, 127f);
+        b.tint(color, alpha);
 
         this.fenetres.add(b.finilize(largeur, hauteur, longueur));
 
@@ -76,15 +105,15 @@ public class Mur extends Boite
         this.addChild(fenetre);
 
         this.addChild(new Boite(applet, this.origX, this.origY, this.origZ)
-                .finilize(largeur, fenetre.getOrigY(), longeur));
+                .finilize(largeur, fenetre.getOrigY() - this.origY, longeur));
 
-        this.addChild(new Boite(applet, fenetre.getOrigX() + fenetre.getLargeur(), fenetre.getOrigY(), this.origZ)
-                .finilize(largeur - (fenetre.getOrigX() + fenetre.getLargeur()), hauteur - fenetre.getOrigY(), longeur));
+        this.addChild(new Boite(applet,fenetre.getOrigX() + fenetre.getLargeur(), fenetre.getOrigY(), this.origZ)
+                .finilize((this.origX + largeur) - (fenetre.getOrigX() + fenetre.getLargeur()), hauteur - (fenetre.getOrigY() - this.origY), longeur));
 
         this.addChild(new Boite(applet, this.origX, fenetre.getOrigY() + fenetre.getHauteur(), this.origZ)
-                .finilize(fenetre.getOrigX() + fenetre.getLargeur(), hauteur - (fenetre.getOrigY() + fenetre.getHauteur()), longeur));
+                .finilize((fenetre.getOrigX() - this.getOrigX()) + fenetre.getLargeur(), hauteur - ((fenetre.getOrigY() - this.origY) + fenetre.getHauteur()), longeur));
 
         this.addChild(new Boite(applet, this.origX, fenetre.getOrigY(), this.origZ)
-                .finilize(fenetre.getOrigX(), fenetre.getHauteur(), longeur));
+                .finilize(fenetre.getOrigX() - this.getOrigX(), fenetre.getHauteur(), longeur));
     }
 }

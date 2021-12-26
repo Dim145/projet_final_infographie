@@ -53,11 +53,6 @@ public class TestsCamera extends BaseProcessing
 
         shape(classe);
 
-        shape(new Mur(this, 0, 0, 0)
-                .addTrou(0, 25, 50, 10, 50, 100, true)
-                .finilize(10, 100, 200)
-        );
-
         if(curseur == null || centerX != curseur.getOrigX() || centerZ != curseur.getOrigZ() || centerY != curseur.getOrigY())
             curseur = new Curseur(this, centerX, centerY, centerZ);
 
