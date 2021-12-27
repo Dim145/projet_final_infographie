@@ -43,28 +43,29 @@ public class Classe extends Composand3D
 
         this.addChild(new TableauTactile(applet, this.origX + Table.LARGUEUR*2, this.origY + Sol.EPAISSEUR, this.origZ - Table.LARGUEUR*1.75f));
 
+        this.addChild(new TableauCraie(applet, this.origX, this.origY + HAUTEUR/3, this.origZ + longeur/4, longeur/2));
+
         Mur[] murs = new Mur[4];
 
-        murs[0] = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
+        murs[3] = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
         murs[1] = new Mur(applet, this.origX + this.getLargeur(), this.origY, this.origZ + this.getLongueur());
         murs[2] = new Mur(applet, this.origX + this.getLargeur(), this.origY, this.origZ);
-        murs[3] = new Mur(applet, this.origX, this.origY, this.origZ + this.getLongueur());
+        murs[0] = new Mur(applet, this.origX, this.origY, this.origZ + this.getLongueur());
 
-        murs[0].addTrou(Sol.EPAISSEUR, Sol.EPAISSEUR, 0,
-                this.getLargeur(), HAUTEUR-Sol.EPAISSEUR*2, Sol.EPAISSEUR, true, Utilities.DARK_WHITE, 100f);
+        murs[0].normal(Face.DERRIERE, 1, 0, 0);
+        murs[0].normal(Face.DEVANT, -1, 0, 0);
 
-        murs[3].normal(Face.DERRIERE, 1, 0, 0);
-        murs[3].normal(Face.DEVANT, -1, 0, 0);
-
-        murs[0].finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR, Sol.EPAISSEUR);
         murs[1].finilize(-this.getLargeur() - Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
         murs[2].finilize(Sol.EPAISSEUR, HAUTEUR, this.getLongueur() + Sol.EPAISSEUR);
-        murs[3].finilize(-Sol.EPAISSEUR, HAUTEUR, -this.getLongueur());
+        murs[0].finilize(-Sol.EPAISSEUR, HAUTEUR, -this.getLongueur());
+
+        murs[3].addTrou(Sol.EPAISSEUR, Sol.EPAISSEUR, 0,
+                this.getLargeur(), HAUTEUR-Sol.EPAISSEUR*2, Sol.EPAISSEUR, true, Utilities.DARK_WHITE, 100f);
+
+        murs[3].finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR, Sol.EPAISSEUR);
 
         for (Boite m : murs)
             this.addChild(m);
-
-        this.addChild(new TableauCraie(applet, this.origX, this.origY + HAUTEUR/3, this.origZ + longeur/4, longeur/2));
     }
 
     public float getLongueur()
