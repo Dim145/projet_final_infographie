@@ -42,27 +42,64 @@ public class Classe extends Composand3D
         this.longeur += departBureauxLongeur;
 
         this.addChild(new TableauTactile(applet, this.origX + Table.LARGUEUR*2, this.origY + Sol.EPAISSEUR, this.origZ - Table.LARGUEUR*1.75f));
-
         this.addChild(new TableauCraie(applet, this.origX, this.origY + HAUTEUR/3, this.origZ + longeur/4, longeur/2));
 
         Mur[] murs = new Mur[4];
 
-        murs[3] = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
-        murs[1] = new Mur(applet, this.origX + this.getLargeur(), this.origY, this.origZ + this.getLongueur());
+        murs[1] = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ + this.getLongueur());
         murs[2] = new Mur(applet, this.origX + this.getLargeur(), this.origY, this.origZ);
         murs[0] = new Mur(applet, this.origX, this.origY, this.origZ + this.getLongueur());
 
         murs[0].normal(Face.DERRIERE, 1, 0, 0);
         murs[0].normal(Face.DEVANT, -1, 0, 0);
 
-        murs[1].finilize(-this.getLargeur() - Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
+        for (Boite m : murs)
+            if(m!= null)
+                m.tint(Utilities.BEIGE_BIZZARE);
+
+        murs[1].fillTrou(false).addTrou(Sol.EPAISSEUR*2, Sol.EPAISSEUR, 0,
+                HAUTEUR/4, HAUTEUR/1.5f, Sol.EPAISSEUR, true, Utilities.LIGHT_GRAY, 0);
+
+        murs[1].finilize(this.getLargeur(), HAUTEUR, Sol.EPAISSEUR);
         murs[2].finilize(Sol.EPAISSEUR, HAUTEUR, this.getLongueur() + Sol.EPAISSEUR);
         murs[0].finilize(-Sol.EPAISSEUR, HAUTEUR, -this.getLongueur());
 
-        murs[3].addTrou(Sol.EPAISSEUR, Sol.EPAISSEUR, 0,
-                this.getLargeur(), HAUTEUR-Sol.EPAISSEUR*2, Sol.EPAISSEUR, true, Utilities.DARK_WHITE, 100f);
+        Mur basMurF = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
 
-        murs[3].finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR, Sol.EPAISSEUR);
+        basMurF.tint(Utilities.BEIGE_BIZZARE);
+
+        Mur f1 = createFenetre(basMurF.getOrigX(), basMurF.getOrigY() + HAUTEUR/3, basMurF.getOrigZ(),
+                HAUTEUR/4, HAUTEUR/2, Sol.EPAISSEUR);
+        basMurF.addChild(f1);
+
+        boolean isCarre = true;
+        while(f1.getOrigX() + f1.getLargeur() <= this.getLargeur())
+        {
+            f1 = createFenetre(f1.getOrigX() + f1.getLargeur(), f1.getOrigY(), f1.getOrigZ(),
+                    (HAUTEUR/4)*(isCarre ? 2 : 1), f1.getHauteur(), f1.getLongeur());
+
+            isCarre = !isCarre;
+
+            basMurF.addChild(f1);
+        }
+
+        Mur f2 = createFenetre(basMurF.getOrigX(), f1.getOrigY() + f1.getHauteur(), basMurF.getOrigZ(),
+                f1.getLargeur()*2, (this.origY + HAUTEUR)-(f1.getOrigY()+f1.getHauteur()), Sol.EPAISSEUR);
+        basMurF.addChild(f2);
+
+        isCarre = true;
+        while(f2.getOrigX() + f2.getLargeur() <= this.getLargeur())
+        {
+            f2 = createFenetre(f2.getOrigX() + f2.getLargeur(), f2.getOrigY(), f2.getOrigZ(),
+                    (f1.getLargeur()*2)/(isCarre ? 2 : 1), f2.getHauteur(), f2.getLongeur());
+
+            if(f2.getOrigX() + f2.getLargeur()*2 <= this.getLargeur())
+                isCarre = !isCarre;
+
+            basMurF.addChild(f2);
+        }
+
+        murs[3] = (Mur) basMurF.finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR/3, Sol.EPAISSEUR);
 
         for (Boite m : murs)
             this.addChild(m);
@@ -76,5 +113,18 @@ public class Classe extends Composand3D
     public float getLargeur()
     {
         return this.largeur;
+    }
+
+    private Mur createFenetre(float startX, float startY, float startZ, float largeur, float hauteur, float longeur)
+    {
+        Mur f1 = new Mur(applet, startX, startY, startZ);
+
+        f1.tint(Utilities.DARK_GRAY);
+
+        f1.addTrou(Sol.EPAISSEUR, Sol.EPAISSEUR, 0,
+                largeur - Sol.EPAISSEUR*2, hauteur - Sol.EPAISSEUR*2, longeur,
+                true, Utilities.DARK_WHITE, 100f);
+
+        return (Mur) f1.finilize(largeur, hauteur, longeur);
     }
 }

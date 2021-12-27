@@ -21,7 +21,7 @@ public class Boite extends Composand3D
      * 4: derriere (dir: -x) <br/>
      * 5: devant (dir: (x)
      */
-    private final PImage[] images;
+    protected final PImage[] images;
 
     /**
      * 0: droite (dir: -z) <br/>
@@ -31,7 +31,7 @@ public class Boite extends Composand3D
      * 4: derriere (dir: -x) <br/>
      * 5: devant (dir: (x)
      */
-    private final float[] shininesss;
+    protected final float[] shininesss;
 
     /**
      * 0: droite (dir: -z) <br/>
@@ -41,7 +41,7 @@ public class Boite extends Composand3D
      * 4: derriere (dir: -x) <br/>
      * 5: devant (dir: (x)
      */
-    private final Integer[] tints;
+    protected final Integer[] tints;
 
     /**
      * 0: droite (dir: -z) <br/>
@@ -51,7 +51,7 @@ public class Boite extends Composand3D
      * 4: derriere (dir: -x) <br/>
      * 5: devant (dir: (x)
      */
-    private final PVector[] normals;
+    protected final PVector[] normals;
 
     /**
      * 0: droite (dir: -z) <br/>
@@ -61,11 +61,11 @@ public class Boite extends Composand3D
      * 4: derriere (dir: -x) <br/>
      * 5: devant (dir: (x)
      */
-    private final Float[] alphas;
+    protected final Float[] alphas;
 
-    private float hauteur;
-    private float largeur;
-    private float longeur;
+    protected float hauteur;
+    protected float largeur;
+    protected float longeur;
 
     private boolean noStroke;
 
