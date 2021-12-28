@@ -101,6 +101,39 @@ public abstract class Composand3D extends PShape
         return origZ;
     }
 
+    public float getActualX()
+    {
+        try
+        {
+            return this.listChild.size() > 0 ? this.listChild.get(0).getChild(0).getVertex(0).x : this.origX;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+
+            return this.origX;
+        }
+    }
+
+    public float getActualZ()
+    {
+        try
+        {
+            return this.listChild.size() > 0 ? this.listChild.get(0).getChild(0).getVertex(0).z : this.origZ;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+
+            return this.origZ;
+        }
+    }
+
+    public float getActualY()
+    {
+        return this.listChild.size() > 0 ? this.listChild.get(0).getVertexY(0) : this.origY;
+    }
+
     public void setOrigX(float x)
     {
         origX = x;

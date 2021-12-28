@@ -12,6 +12,9 @@ public class Classe extends Composand3D
     private float largeur;
     private float longeur;
 
+    private final Boite porte;
+    private boolean porteOuverte;
+
     public Classe(PApplet applet, int nbRanger, int nbTableParRanger)
     {
         super(applet, 0, 0, 0);
@@ -21,6 +24,7 @@ public class Classe extends Composand3D
 
         this.largeur = Table.LARGUEUR + Table.LARGUEUR * 2 * (nbRanger + 1);
         this.longeur = Table.LONGUEUR * nbTableParRanger;
+        this.porteOuverte = false;
 
         for (int i = 0; i < nbRanger; i++)
             for (int j = 0; j < nbTableParRanger; j++)
@@ -44,6 +48,13 @@ public class Classe extends Composand3D
         this.addChild(new TableauTactile(applet, this.origX + Table.LARGUEUR*2, this.origY + Sol.EPAISSEUR, this.origZ - Table.LARGUEUR*1.75f));
         this.addChild(new TableauCraie(applet, this.origX, this.origY + HAUTEUR/3, this.origZ + longeur/4, longeur/2));
 
+        this.porte = new Boite(applet, this.origX + Sol.EPAISSEUR, Sol.EPAISSEUR, this.origZ + this.getLongueur());
+
+        this.porte.tint(Utilities.VERT_FONCER);
+
+        this.addChild(this.porte.finilize(HAUTEUR/4, HAUTEUR/1.5f, Sol.EPAISSEUR));
+
+        // Les murs ainsi que les fenêtres doivent être ajouter en derniers.
         Mur[] murs = new Mur[4];
 
         murs[1] = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ + this.getLongueur());
@@ -60,7 +71,7 @@ public class Classe extends Composand3D
         murs[1].fillTrou(false).addTrou(Sol.EPAISSEUR*2, Sol.EPAISSEUR, 0,
                 HAUTEUR/4, HAUTEUR/1.5f, Sol.EPAISSEUR, true, Utilities.LIGHT_GRAY, 0);
 
-        murs[1].finilize(this.getLargeur(), HAUTEUR, Sol.EPAISSEUR);
+        murs[1].finilize(this.getLargeur() + Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
         murs[2].finilize(Sol.EPAISSEUR, HAUTEUR, this.getLongueur() + Sol.EPAISSEUR);
         murs[0].finilize(-Sol.EPAISSEUR, HAUTEUR, -this.getLongueur());
 
@@ -68,7 +79,7 @@ public class Classe extends Composand3D
 
         basMurF.tint(Utilities.BEIGE_BIZZARE);
 
-        Mur f1 = createFenetre(basMurF.getOrigX(), basMurF.getOrigY() + HAUTEUR/3, basMurF.getOrigZ(),
+        Mur f1 = createFenetre(basMurF.getOrigX(), basMurF.getOrigY() + HAUTEUR/3 - Sol.EPAISSEUR, basMurF.getOrigZ(),
                 HAUTEUR/4, HAUTEUR/2, Sol.EPAISSEUR);
         basMurF.addChild(f1);
 
@@ -84,7 +95,7 @@ public class Classe extends Composand3D
         }
 
         Mur f2 = createFenetre(basMurF.getOrigX(), f1.getOrigY() + f1.getHauteur(), basMurF.getOrigZ(),
-                f1.getLargeur()*2, (this.origY + HAUTEUR)-(f1.getOrigY()+f1.getHauteur()), Sol.EPAISSEUR);
+                f1.getLargeur()*2, (this.origY + HAUTEUR - Sol.EPAISSEUR)-(f1.getOrigY()+f1.getHauteur()), Sol.EPAISSEUR);
         basMurF.addChild(f2);
 
         isCarre = true;
@@ -99,7 +110,10 @@ public class Classe extends Composand3D
             basMurF.addChild(f2);
         }
 
-        murs[3] = (Mur) basMurF.finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR/3, Sol.EPAISSEUR);
+        basMurF.addChild(new Mur(applet, this.origX - Sol.EPAISSEUR, HAUTEUR - Sol.EPAISSEUR, this.origZ - Sol.EPAISSEUR)
+                .finilize(this.getLargeur() + Sol.EPAISSEUR*2, Sol.EPAISSEUR, Sol.EPAISSEUR));
+
+        murs[3] = (Mur) basMurF.finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR/3 - Sol.EPAISSEUR, Sol.EPAISSEUR);
 
         for (Boite m : murs)
             this.addChild(m);
@@ -113,6 +127,30 @@ public class Classe extends Composand3D
     public float getLargeur()
     {
         return this.largeur;
+    }
+
+    public void rotatePorte()
+    {
+        new Thread(() ->
+        {
+            boolean ouvrir = porteOuverte;
+
+            float lastZ  = porte.getOrigZ();
+
+            float rotate = PApplet.radians(90) * (ouvrir ? -1 : 1);
+            porte.rotateY(rotate);
+
+            if(ouvrir)
+            {
+                porte.translate(-HAUTEUR/3 + Sol.EPAISSEUR/2f, 0, lastZ + Sol.EPAISSEUR*3);
+            }
+            else
+            {
+                porte.translate(-(lastZ + Sol.EPAISSEUR*3), 0, -HAUTEUR/3 + Sol.EPAISSEUR/2f);
+            }
+        }).start();
+
+        this.porteOuverte = !this.porteOuverte;
     }
 
     private Mur createFenetre(float startX, float startY, float startZ, float largeur, float hauteur, float longeur)

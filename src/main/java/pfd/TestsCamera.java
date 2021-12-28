@@ -111,6 +111,9 @@ public class TestsCamera extends BaseProcessing
     public void keyReleased(KeyEvent event)
     {
         this.keysEvents.remove(event.getKey());
+
+        if(event.getKey() == 'p')
+            classe.rotatePorte();
     }
 
     public static void main(String[] args)
