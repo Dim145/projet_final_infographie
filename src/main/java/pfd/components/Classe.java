@@ -133,15 +133,17 @@ public class Classe extends Composand3D
     {
         new Thread(() ->
         {
+            // Ne fonctionne que dans le cas où le centre de l'écran se trouve au centre de la classe
             boolean ouvrir = porteOuverte;
+
+            float lastX = -(porte.getActualX() + Sol.EPAISSEUR*2) - porte.getLargeur();
+            float lastZ = porte.getActualZ() + Sol.EPAISSEUR*3;
 
             float rotate = PApplet.radians(90) * (ouvrir ? -1 : 1);
             porte.rotateY(rotate);
 
-            float translateX = -porte.getLargeur() - Sol.EPAISSEUR*2;
-            float translateY = this.getLongueur() + Sol.EPAISSEUR*3;
+            porte.translate(ouvrir ? lastX : -lastZ, 0, ouvrir ? lastZ : lastX);
 
-            porte.translate(ouvrir ? translateX : -translateY, 0, ouvrir ? translateY : translateX);
         }).start();
 
         this.porteOuverte = !this.porteOuverte;
