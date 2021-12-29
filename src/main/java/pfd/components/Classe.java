@@ -135,19 +135,13 @@ public class Classe extends Composand3D
         {
             boolean ouvrir = porteOuverte;
 
-            float lastZ  = porte.getOrigZ();
-
             float rotate = PApplet.radians(90) * (ouvrir ? -1 : 1);
             porte.rotateY(rotate);
 
-            if(ouvrir)
-            {
-                porte.translate(-HAUTEUR/3 + Sol.EPAISSEUR/2f, 0, lastZ + Sol.EPAISSEUR*3);
-            }
-            else
-            {
-                porte.translate(-(lastZ + Sol.EPAISSEUR*3), 0, -HAUTEUR/3 + Sol.EPAISSEUR/2f);
-            }
+            float translateX = -porte.getLargeur() - Sol.EPAISSEUR*2;
+            float translateY = this.getLongueur() + Sol.EPAISSEUR*3;
+
+            porte.translate(ouvrir ? translateX : -translateY, 0, ouvrir ? translateY : translateX);
         }).start();
 
         this.porteOuverte = !this.porteOuverte;
