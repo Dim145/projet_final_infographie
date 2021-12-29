@@ -27,6 +27,7 @@ public class TestsCamera extends BaseProcessing
     private final HashMap<Character, KeyEvent> keysEvents = new HashMap<>();
     private PMatrix3D baseMat;
     private Curseur curseur;
+    private boolean drawAxis = true;
 
     @Override
     public void setup()
@@ -49,7 +50,8 @@ public class TestsCamera extends BaseProcessing
     {
         pushMatrix();
 
-        axis.draw(this);
+        if(drawAxis)
+            axis.draw(this);
 
         shape(classe);
 
@@ -114,6 +116,9 @@ public class TestsCamera extends BaseProcessing
 
         if(event.getKey() == 'p')
             classe.rotatePorte();
+
+        if(event.isControlDown() && event.getKeyCode() == VK_Q)
+            this.drawAxis = !this.drawAxis;
     }
 
     public static void main(String[] args)

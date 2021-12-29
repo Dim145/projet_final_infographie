@@ -20,6 +20,7 @@ Il est possible de contrôler le "personnage" avec les touches ZQSD. Avec :
 - Espace pour aller vers le haut (~ au saut ou vol de minecraft)
 - shift pour descendre (~ à se baisser ou descendre sur minecraft)
 - CTRL + R pour réinitialiser position et caméra
+- CTRL + A (ou Q pour clavier QUERTY) pour enlever/ajouter les axes
 
 La caméra se contrôle via la souris.  
 
