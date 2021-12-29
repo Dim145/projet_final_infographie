@@ -1,7 +1,7 @@
 ## Modelisation de la salle de classe A106
 #### Projet réalisé par **Dimitri Dubois**  
 
-###1 Précisions sur les termes:
+### 1 Précisions sur les termes:
 Tous le long du projet je considèrerais que:
 - Les coordonées X Y Z sont celles fixe par rapport à l'écran. Elles sont modélisé par les axes rouge, vert et bleu.
 - De même:
@@ -10,7 +10,7 @@ Tous le long du projet je considèrerais que:
   - Pareil pour la hauteur le long de l'axe Y
 - la coordonnée Y est inversé*<sup>1</sup>, donc une valeur négative pointe vers le bas et positive vers le haut.
 
-###2 Les contrôles
+### 2 Les contrôles
 La caméra est contrôlable à la manière d'un jeu vidéo.
 Il est possible de contrôler le "personnage" avec les touches ZQSD. Avec :
 - Z pour avancer
@@ -29,7 +29,7 @@ et les directions sont statiques. Si une rotation à 180° est faite avec la cam
 
 La touche P permet d'ouvrir la porte de la salle.  
 
-###3 Points d'entrée
+### 3 Points d'entrée
 Il existe plusieurs points d'entrée dans le projet. Chacun sont fonctionnels et permettent de voir le comportment de certains éléments :
 - exécuter le projet via la class **TestsCamera** permet d'avoir une caméra fonctionnelle, mais aucuns shader de chargée (celui par défaut).
 - exécuter le projet via la class **TestShaders** permet d'avoir les fonctionnalités précédentes, mais avec les shaders personnalisée et la lumière.
@@ -38,5 +38,5 @@ La commande maven pour compiler et exécuter le code est la suivante :
 `maven compile exec:java -Dfile.encoding=utf-8 -Dexec.mainClass=pfd.TestShaders`  
 Des guillemets peuvent être nécessaires sur les paramètres (après les '=') selon votre système d'exploitation.
 
-###4 Pécisions
+### 4 Pécisions
 - 1: Au début du programme, la caméra est inversée sur l'axe Y, le reste est créé et déplacé normalement. Donc si la caméra est mise dans le bon sens, toutes les formes seraient à l'envers.
