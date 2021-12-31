@@ -49,6 +49,10 @@ public class Classe extends Composand3D
         this.porte = new Porte(applet,this.origX + Sol.EPAISSEUR, Sol.EPAISSEUR, this.origZ + this.getLongueur(), false);
         this.addChild(this.porte);
 
+        this.addChild(new Radiateur(applet, this.origX + this.getLargeur()/4, this.origY + HAUTEUR/3 - Radiateur.HAUTEUR*1.5f, this.origZ));
+        this.addChild(new Radiateur(applet, this.origX + this.getLargeur()/2, this.origY + HAUTEUR/3 - Radiateur.HAUTEUR*1.5f, this.origZ));
+        this.addChild(new Radiateur(applet, this.origX + this.getLargeur()/4*3, this.origY + HAUTEUR/3 - Radiateur.HAUTEUR*1.5f, this.origZ));
+
         // Les murs ainsi que les fenêtres doivent être ajouter en derniers.
         Mur[] murs = new Mur[4];
 
