@@ -7,13 +7,12 @@ import processing.core.PApplet;
 
 public class Classe extends Composand3D
 {
-    public static float HAUTEUR = Table.LONGUEUR * 1.5f;
+    public static final float HAUTEUR = Table.LONGUEUR * 1.5f;
 
     private float largeur;
     private float longeur;
 
-    private final Boite porte;
-    private boolean porteOuverte;
+    private final Porte porte;
 
     public Classe(PApplet applet, int nbRanger, int nbTableParRanger)
     {
@@ -24,7 +23,6 @@ public class Classe extends Composand3D
 
         this.largeur = Table.LARGUEUR + Table.LARGUEUR * 2 * (nbRanger + 1);
         this.longeur = Table.LONGUEUR * nbTableParRanger;
-        this.porteOuverte = false;
 
         for (int i = 0; i < nbRanger; i++)
             for (int j = 0; j < nbTableParRanger; j++)
@@ -48,18 +46,15 @@ public class Classe extends Composand3D
         this.addChild(new TableauTactile(applet, this.origX + Table.LARGUEUR*2, this.origY + Sol.EPAISSEUR, this.origZ - Table.LARGUEUR*1.75f));
         this.addChild(new TableauCraie(applet, this.origX, this.origY + HAUTEUR/3, this.origZ + longeur/4, longeur/2));
 
-        this.porte = new Boite(applet, this.origX + Sol.EPAISSEUR, Sol.EPAISSEUR, this.origZ + this.getLongueur());
-
-        this.porte.tint(Utilities.VERT_FONCER);
-
-        this.addChild(this.porte.finilize(HAUTEUR/4, HAUTEUR/1.5f, Sol.EPAISSEUR));
+        this.porte = new Porte(applet,this.origX + Sol.EPAISSEUR, Sol.EPAISSEUR, this.origZ + this.getLongueur(), false);
+        this.addChild(this.porte);
 
         // Les murs ainsi que les fenêtres doivent être ajouter en derniers.
         Mur[] murs = new Mur[4];
 
         murs[1] = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ + this.getLongueur());
         murs[2] = new Mur(applet, this.origX + this.getLargeur(), this.origY, this.origZ);
-        murs[0] = new Mur(applet, this.origX, this.origY, this.origZ + this.getLongueur());
+        murs[0] = new Mur(applet, this.origX, this.origY, this.origZ);
 
         murs[0].normal(Face.DERRIERE, 1, 0, 0);
         murs[0].normal(Face.DEVANT, -1, 0, 0);
@@ -69,11 +64,21 @@ public class Classe extends Composand3D
                 m.tint(Utilities.BEIGE_BIZZARE);
 
         murs[1].fillTrou(false).addTrou(Sol.EPAISSEUR*2, Sol.EPAISSEUR, 0,
-                HAUTEUR/4, HAUTEUR/1.5f, Sol.EPAISSEUR, true, Utilities.LIGHT_GRAY, 0);
+                Porte.LONGUEUR, Porte.HAUTEUR, Porte.EPAISSEUR, true);
+
+        murs[2].fillTrou(false).addTrou(0, Sol.EPAISSEUR, Sol.EPAISSEUR*2,
+                Porte.EPAISSEUR, Porte.HAUTEUR, Porte.LONGUEUR, true);
+
+        this.addChild(new Porte(applet, this.origX + this.getLargeur(), this.origY + Sol.EPAISSEUR, this.origZ + Sol.EPAISSEUR*2, true));
+
+        murs[0].fillTrou(false).addTrou(0, Sol.EPAISSEUR, Porte.EPAISSEUR*2,
+                Sol.EPAISSEUR*2, Porte.HAUTEUR, Porte.LONGUEUR, true);
+
+        this.addChild(new Porte(applet, this.origX - Sol.EPAISSEUR, this.origY + Sol.EPAISSEUR, this.origZ + Sol.EPAISSEUR*2, true));
 
         murs[1].finilize(this.getLargeur() + Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
         murs[2].finilize(Sol.EPAISSEUR, HAUTEUR, this.getLongueur() + Sol.EPAISSEUR);
-        murs[0].finilize(-Sol.EPAISSEUR, HAUTEUR, -this.getLongueur());
+        murs[0].finilize(-Sol.EPAISSEUR, HAUTEUR, this.getLongueur());
 
         Mur basMurF = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
 
@@ -131,22 +136,7 @@ public class Classe extends Composand3D
 
     public void rotatePorte()
     {
-        new Thread(() ->
-        {
-            // Ne fonctionne que dans le cas où le centre de l'écran se trouve au centre de la classe
-            boolean ouvrir = porteOuverte;
-
-            float lastX = -(porte.getActualX() + Sol.EPAISSEUR*2) - porte.getLargeur();
-            float lastZ = porte.getActualZ() + Sol.EPAISSEUR*3;
-
-            float rotate = PApplet.radians(90) * (ouvrir ? -1 : 1);
-            porte.rotateY(rotate);
-
-            porte.translate(ouvrir ? lastX : -lastZ, 0, ouvrir ? lastZ : lastX);
-
-        }).start();
-
-        this.porteOuverte = !this.porteOuverte;
+        this.porte.openClose();
     }
 
     private Mur createFenetre(float startX, float startY, float startZ, float largeur, float hauteur, float longeur)
