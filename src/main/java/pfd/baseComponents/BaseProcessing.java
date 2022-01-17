@@ -71,11 +71,8 @@ public abstract class BaseProcessing extends PApplet
     @Override
     public void mouseDragged()
     {
-        tmpMouseY += pmouseY - mouseY;
+        tmpMouseY += pmouseY - mouseY; // caméra inverser sur axe Y
         tmpMouseX += mouseX - pmouseX;
-
-        System.out.println("y:" + tmpMouseY);
-        System.out.println("x:" + tmpMouseX);
 
         phi += map(-tmpMouseY, 0, height, 180, -180) - phi;
         theta += map(-tmpMouseX, 0, width, -180, 180) - theta;
