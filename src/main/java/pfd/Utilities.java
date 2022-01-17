@@ -27,6 +27,9 @@ public final class Utilities
 
     public static final float PAS_DEPLACEMENT = 10f;
 
+    public static int INITIAL_X_CAM_VALUE = 1;
+    public static int INITIAL_Y_CAM_VALUE = -98;
+
     private static PImage defaultImage = null;
 
     public static PImage getDefaultImage(PApplet applet)

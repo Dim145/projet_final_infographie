@@ -86,6 +86,9 @@ public class TestsCamera extends BaseProcessing
 
                 phi = Utilities.DEFAULT_PHI;
                 theta = Utilities.DEFAULT_THETA;
+
+                tmpMouseX = Utilities.INITIAL_X_CAM_VALUE;
+                tmpMouseY = Utilities.INITIAL_Y_CAM_VALUE;
             }
 
             if(event.getKey() == 'z' || keyCode == VK_S)

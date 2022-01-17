@@ -30,6 +30,9 @@ public abstract class BaseProcessing extends PApplet
     protected float centerY = 0;
     protected float centerZ = 0;
 
+    protected int tmpMouseY = Utilities.INITIAL_Y_CAM_VALUE;
+    protected int tmpMouseX = Utilities.INITIAL_X_CAM_VALUE;
+
     @Override
     public void settings()
     {
@@ -68,8 +71,20 @@ public abstract class BaseProcessing extends PApplet
     @Override
     public void mouseDragged()
     {
-        phi = map(-mouseY, 0, height, 180, -180);
-        theta = map(-mouseX, 0, width, -180, 180);
+        tmpMouseY += pmouseY - mouseY;
+        tmpMouseX += mouseX - pmouseX;
+
+        System.out.println("y:" + tmpMouseY);
+        System.out.println("x:" + tmpMouseX);
+
+        phi += map(-tmpMouseY, 0, height, 180, -180) - phi;
+        theta += map(-tmpMouseX, 0, width, -180, 180) - theta;
+    }
+
+    @Override
+    public void mouseReleased()
+    {
+
     }
 
     @Override
