@@ -15,6 +15,8 @@ public class Mur extends Boite
     {
         super(applet, origX, origY, origZ);
 
+        Utilities.MURS.add(this);
+
         this.fenetres = new ArrayList<>();
         this.addFenetre = true;
 

@@ -1,12 +1,16 @@
 package pfd;
 
+import pfd.components.Mur;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public final class Utilities
 {
+    public static final ArrayList<Mur> MURS = new ArrayList<>(0);
+
     public static final int METAL_SHININESS = 10;
     public static final int MAT_SHININESS = METAL_SHININESS * 2;
     public static final int SUPER_MAT_SHININESS = MAT_SHININESS * 2;

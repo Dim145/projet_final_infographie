@@ -61,7 +61,7 @@ public abstract class BaseProcessing extends PApplet
         dessiner();
     }
 
-    void updateCamera()
+    public void updateCamera()
     {
         camX = rayon * cos(radians(phi)) * cos(radians(theta)) + X + centerX;
         camY = rayon * sin(radians(phi)) + Y + centerY;
