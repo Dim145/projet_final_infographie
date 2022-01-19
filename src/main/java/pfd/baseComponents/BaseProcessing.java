@@ -79,12 +79,6 @@ public abstract class BaseProcessing extends PApplet
     }
 
     @Override
-    public void mouseReleased()
-    {
-
-    }
-
-    @Override
     public void mouseWheel(MouseEvent event)
     {
         rayon += PAS_CAMERA * (event.getCount() > 0 ? 1 : -1);

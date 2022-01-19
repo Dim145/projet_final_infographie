@@ -1,6 +1,8 @@
 package pfd;
 
+import gif.Gif;
 import pfd.baseComponents.BaseProcessing;
+import pfd.baseComponents.Face;
 import pfd.components.Boite;
 import pfd.components.Classe;
 
@@ -29,81 +31,109 @@ public class TestsCamera extends BaseProcessing
     private Curseur curseur;
     private boolean drawAxis = true;
 
+    private int dirX = 1;
+    private int dirY = 1;
+
+    private Gif gif = null;
+
     @Override
     public void setup()
     {
         super.setup();
 
-        classe = new Classe(this, 4, 3);
-
-        translateValue.x = -(classe.getLargeur())  / 2f;
-        translateValue.z = -(classe.getLongueur()) / 2f;
-
-        classe.translate(translateValue.x, translateValue.y, translateValue.z);
         axis = new Axis(0f, 0f, 0f, width*2, height*2, width*2, 2);
 
         baseMat = getMatrix(baseMat);
+
+        this.gif = new Gif(this, "images/circle.gif", 15);
+        gif.play();
     }
 
     @Override
     public void dessiner()
     {
-        pushMatrix();
-
-        if(drawAxis)
-            axis.draw(this);
-
-        shape(classe);
-
-        if(curseur == null || centerX != curseur.getOrigX() || centerZ != curseur.getOrigZ() || centerY != curseur.getOrigY())
-            curseur = new Curseur(this, centerX, centerY, centerZ);
-
-        shape(curseur);
-
-        for (KeyEvent event : this.keysEvents.values())
+        if(classe != null)
         {
-            int keyCode = event.getKeyCode();
+            pushMatrix();
 
-            if(keyCode == VK_SPACE || keyCode == VK_SHIFT)
+            if(drawAxis)
+                axis.draw(this);
+
+            shape(classe);
+
+            if(curseur == null || centerX != curseur.getOrigX() || centerZ != curseur.getOrigZ() || centerY != curseur.getOrigY())
+                curseur = new Curseur(this, centerX, centerY, centerZ);
+
+            shape(curseur);
+
+            for (KeyEvent event : this.keysEvents.values())
             {
-                int mult = (keyCode == VK_SHIFT ? -1 : 1);
+                int keyCode = event.getKeyCode();
 
-                centerY += Utilities.PAS_DEPLACEMENT * mult;
+                if(keyCode == VK_SPACE || keyCode == VK_SHIFT)
+                {
+                    int mult = (keyCode == VK_SHIFT ? -1 : 1);
+
+                    centerY += Utilities.PAS_DEPLACEMENT * mult;
+                }
+
+                if(event.getKey() == 'q' || keyCode == VK_D)
+                {
+                    int mult = (event.getKey() == 'q' ? -1 : 1);
+
+                    centerZ += Utilities.PAS_DEPLACEMENT * mult;
+                }
+
+                if(event.isControlDown() && keyCode == VK_R)
+                {
+                    centerY = 0;
+                    centerZ = 0;
+                    centerX = 0;
+
+                    phi = Utilities.DEFAULT_PHI;
+                    theta = Utilities.DEFAULT_THETA;
+
+                    tmpMouseX = Utilities.INITIAL_X_CAM_VALUE;
+                    tmpMouseY = Utilities.INITIAL_Y_CAM_VALUE;
+                }
+
+                if(event.getKey() == 'z' || keyCode == VK_S)
+                {
+                    int mult = (event.getKey() == 'z' ? -1 : 1);
+
+                    centerX += Utilities.PAS_DEPLACEMENT * mult * dirX;
+                }
             }
 
-            if(event.getKey() == 'q' || keyCode == VK_D)
-            {
-                int mult = (event.getKey() == 'q' ? -1 : 1);
-
-                centerZ += Utilities.PAS_DEPLACEMENT * mult;
-            }
-
-            if(event.isControlDown() && keyCode == VK_R)
-            {
-                centerY = 0;
-                centerZ = 0;
-                centerX = 0;
-
-                phi = Utilities.DEFAULT_PHI;
-                theta = Utilities.DEFAULT_THETA;
-
-                tmpMouseX = Utilities.INITIAL_X_CAM_VALUE;
-                tmpMouseY = Utilities.INITIAL_Y_CAM_VALUE;
-            }
-
-            if(event.getKey() == 'z' || keyCode == VK_S)
-            {
-                int mult = (event.getKey() == 'z' ? -1 : 1);
-
-                centerX += Utilities.PAS_DEPLACEMENT * mult;
-            }
+            popMatrix();
         }
-
-        popMatrix();
 
         this.setMatrix(baseMat);
 
         text("z q s d pour déplacement\nespace pour monter\nshift pour descendre", 10, height-30);
+
+        if(classe == null)
+        {
+            int widthTmp = sketchFullScreen() ? displayWidth : width;
+            int heigthTmp = sketchFullScreen() ? displayHeight : height;
+
+            image(this.gif, widthTmp/2f - this.gif.width/2f, heigthTmp /2f - this.gif.height/2f);
+
+            float ts = g.textSize;
+            textSize(50);
+            text("CHARGEMENT", widthTmp/2f-150, heigthTmp/2f+10);
+            textSize(ts);
+        }
+    }
+
+    @Override
+    public void mouseDragged()
+    {
+        if(classe == null) return;
+
+        super.mouseDragged();
+
+        dirX = theta < -100 && theta > -250 ? 1 : -1;
     }
 
     @Override
