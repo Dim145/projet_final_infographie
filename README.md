@@ -1,12 +1,12 @@
-## Modelisation de la salle de classe A106
+##Modélisation de la salle de classe A106
 #### Projet réalisé par **Dimitri Dubois**  
 
-### 1 Précisions sur les termes:
-Tous le long du projet je considèrerais que:
-- Les coordonées X Y Z sont celles fixe par rapport à l'écran. Elles sont modélisé par les axes rouge, vert et bleu.
+### 1 Précision sur les termes :
+Tous le long du projet je considèrerais que :
+- Les coordonnées X Y Z sont celles fixe par rapport à l'écran. Elles sont modélisées par les axes rouge, vert et bleu.
 - De même:
-  - la largeur représenteras toujours la taille le long de l'axe X
-  - La longueur représenteras toujours la taille le long de l'axe Z
+  - La largeur représentera toujours la taille le long de l'axe X
+  - La longueur représentera toujours la taille le long de l'axe Z
   - Pareil pour la hauteur le long de l'axe Y
 - la coordonnée Y est inversé*<sup>1</sup>, donc une valeur négative pointe vers le bas et positive vers le haut.
 
