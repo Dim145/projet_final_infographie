@@ -6,6 +6,8 @@ import processing.event.KeyEvent;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static java.awt.event.KeyEvent.VK_Q;
+
 public class TestNewCamera extends TestShaders
 {
     //constants
@@ -210,6 +212,9 @@ public class TestNewCamera extends TestShaders
 
         if(event.getKey() == 'p')
             classe.rotatePorte();
+
+        if(event.isControlDown() && event.getKeyCode() == VK_Q)
+            this.drawAxis = !this.drawAxis;
     }
 
     public void locationUpdate()

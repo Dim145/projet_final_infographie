@@ -3,11 +3,8 @@ package pfd;
 import gif.Gif;
 import pfd.baseComponents.BaseProcessing;
 import pfd.baseComponents.Face;
-import pfd.components.Boite;
-import pfd.components.Classe;
+import pfd.components.*;
 
-import pfd.components.Curseur;
-import pfd.components.Mur;
 import processing.core.*;
 import processing.event.Event;
 import processing.event.KeyEvent;
@@ -21,6 +18,8 @@ import static java.awt.event.KeyEvent.*;
 
 public class TestsCamera extends BaseProcessing
 {
+    private static boolean isThisClassStratPoint = false;
+
     private Axis axis;
 
     protected Classe classe = null;
@@ -29,7 +28,7 @@ public class TestsCamera extends BaseProcessing
     private final HashMap<Character, KeyEvent> keysEvents = new HashMap<>();
     private PMatrix3D baseMat;
     private Curseur curseur;
-    private boolean drawAxis = true;
+    protected boolean drawAxis = true;
 
     private int dirX = 1;
     private int dirY = 1;
@@ -40,6 +39,19 @@ public class TestsCamera extends BaseProcessing
     public void setup()
     {
         super.setup();
+
+        if(isThisClassStratPoint)
+        {
+            new Thread(() ->
+            {
+                classe = new Classe(this, 4, 3);
+
+                translateValue.x = -(classe.getLargeur())  / 2f;
+                translateValue.z = -(classe.getLongueur()) / 2f;
+
+                classe.translate(translateValue.x, translateValue.y, translateValue.z);
+            }).start();
+        }
 
         axis = new Axis(0f, 0f, 0f, width*2, height*2, width*2, 2);
 
@@ -156,6 +168,7 @@ public class TestsCamera extends BaseProcessing
 
     public static void main(String[] args)
     {
+        isThisClassStratPoint = true;
         PApplet.main(TestsCamera.class.getName());
     }
 }
