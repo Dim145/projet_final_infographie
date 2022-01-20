@@ -110,7 +110,7 @@ public class TestsCamera extends BaseProcessing
 
         this.setMatrix(baseMat);
 
-        text("z q s d pour déplacement\nespace pour monter\nshift pour descendre", 10, height-30);
+        text("z q s d pour déplacement\nespace pour sauter\nclic bords pour tourner", 10, height-50);
 
         if(classe == null)
         {

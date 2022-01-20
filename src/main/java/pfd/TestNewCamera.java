@@ -9,9 +9,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class TestNewCamera extends TestShaders
 {
     //constants
-    protected static final float sensitivity = 30; //Bigger number = slower
+    /**
+     * Bigger number = slower
+     */
+    protected static final float sensitivity = 30;
     protected static final int stillBox = 300;
-    protected static final int cameraDistance = 5000;
+    protected static final int cameraDistance = 2000;
     protected static final float magnitude_max = 1.5f;
 
     //Camera Variables
@@ -28,7 +31,12 @@ public class TestNewCamera extends TestShaders
     protected boolean canJump;
     protected boolean moveUP, moveDOWN, moveLEFT, moveRIGHT;
 
-    protected int movementSpeed = 50; //Bigger number = slower
+    /**
+     * Bigger number = slower
+     */
+    protected int movementSpeed = 50;
+
+    private boolean isCorrectCameraFirstTime = false;
 
     public static void main(String[] args)
     {
@@ -41,11 +49,11 @@ public class TestNewCamera extends TestShaders
         super.setup();
 
         //Camera Initialization
-        x = width/2f;
+        x = 0;
         y = Classe.HAUTEUR/2;
-        z = (height/2.0f) / tan(PI*60.0f / 360.0f);
-        tx = width/2f;
-        ty = height/2f;
+        z = 1 / tan(PI*60.0f / 360.0f);
+        tx = -width/2f;
+        ty = 0;
         tz = 0;
         rotX = 0;
         rotY = 0;
@@ -74,10 +82,26 @@ public class TestNewCamera extends TestShaders
             if(this.mousePressed)
                 cameraUpdate();
             jumpManager(10);
-        }
 
-        //Camera Mode 1 - Original
-        camera(x,y,z,tx,ty,tz,0,-1,0);
+            //Camera Mode 1 - Original
+            camera(x,y,z,tx,ty,tz,0,-1,0);
+        }
+        else
+        {
+            if(!isCorrectCameraFirstTime)
+            {
+                int tmp = mouseX;
+                mouseX = width*2+300;
+                cameraUpdate(false);
+                mouseX = tmp;
+                cameraUpdate(false);
+
+                isCorrectCameraFirstTime = true;
+            }
+
+            camera(width/2f,Classe.HAUTEUR/2,(height/2.0f) / tan(PI*60.0f / 360.0f),
+                    width/2f,height/2f,0,0,-1,0);
+        }
 
         super.dessiner();
     }
@@ -243,6 +267,11 @@ public class TestNewCamera extends TestShaders
 
     private void cameraUpdate()
     {
+        cameraUpdate(true);
+    }
+
+    private void cameraUpdate(boolean updateY)
+    {
         int diffX = mouseX - width / 2;
         int diffY = mouseY - height / 2;
 
@@ -264,7 +293,7 @@ public class TestNewCamera extends TestShaders
             tz = -newZComp + z;
         }
 
-        if (abs(diffY) > stillBox) ty -= diffY / (sensitivity / 1.5);
+        if (updateY && abs(diffY) > stillBox) ty -= diffY / (sensitivity / 5);
     }
 
     @Override
