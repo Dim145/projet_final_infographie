@@ -48,6 +48,12 @@ public abstract class Composand3D extends PShape
     }
 
     @Override
+    public void addChild(PShape who, int idx)
+    {
+        this.listChild.add(idx, who);
+    }
+
+    @Override
     public void translate(float x, float y, float z)
     {
         super.translate(x, y, z);

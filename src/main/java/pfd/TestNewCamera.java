@@ -1,6 +1,8 @@
 package pfd;
 
 import pfd.components.Classe;
+import pfd.components.Mur;
+import pfd.components.Sol;
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
@@ -71,6 +73,23 @@ public class TestNewCamera extends TestShaders
         moveRIGHT = false;
         canJump = true;
         vY = 0;
+
+        new Thread(() ->
+        {
+            try
+            {
+                loaderClasse.join();
+
+                Mur m = new Mur(this, -Sol.EPAISSEUR, Classe.HAUTEUR, -Sol.EPAISSEUR);
+                classe.addChild(m.finalize(classe.getLargeur() + Sol.EPAISSEUR*2, Sol.EPAISSEUR, classe.getLongueur() + Sol.EPAISSEUR*2), 0);
+
+                m.translate(translateValue.x, translateValue.y, translateValue.z);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     @Override

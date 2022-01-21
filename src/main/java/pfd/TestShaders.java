@@ -19,7 +19,7 @@ public class TestShaders extends TestsCamera
             // 4 dernière = lumière extérieur
             new PVector(300, Classe.HAUTEUR/2, 300),
             new PVector(-300, Classe.HAUTEUR/2, 300),
-            new PVector(-300, Classe.HAUTEUR/2, -300),
+            new PVector(0, Classe.HAUTEUR*2, 0),
             new PVector(0, -Classe.HAUTEUR*2, 0)
     };
 
@@ -36,12 +36,14 @@ public class TestShaders extends TestsCamera
 
     Boite[] lights = null;
 
+    protected Thread loaderClasse = null;
+
     @Override
     public void setup()
     {
         super.setup();
 
-        new Thread(() ->
+        loaderClasse = new Thread(() ->
         {
             classe = new Classe(this, 4, 3);
 
@@ -73,16 +75,18 @@ public class TestShaders extends TestsCamera
             lightPos[5].x = classe.getLargeur()*2 + translateValue.x;
             lightPos[5].y = Classe.HAUTEUR/2;
             lightPos[5].z = classe.getLongueur()*2 + translateValue.z;
-
-            lightPos[6].x = classe.getLargeur()*2 + translateValue.x;
-            lightPos[6].y = Classe.HAUTEUR/2;
-            lightPos[6].z = -classe.getLongueur()/2 + translateValue.z;
+//
+//            lightPos[6].x = classe.getLargeur()*2 + translateValue.x;
+//            lightPos[6].y = Classe.HAUTEUR/2;
+//            lightPos[6].z = -classe.getLongueur()/2 + translateValue.z;
 
             lights = new Boite[lightPos.length];
 
             for (int i = 0; i < lights.length; i++)
                 lights[i] = new Boite(this, lightPos[i].x, lightPos[i].y-10, lightPos[i].z).addStroke().finalize(10, 10, 10);
-        }).start();
+        });
+
+        loaderClasse.start();
 
         this.shader = loadShader("shaders/fragment.glsl", "shaders/vert.glsl");
     }
