@@ -142,7 +142,7 @@ public class TestNewCamera extends TestShaders
         }
         else if (y > Classe.HAUTEUR/2)
         {
-            vY--;
+            vY -= 0.5;
         }
         else if (y <= Classe.HAUTEUR/2)
         {
@@ -150,7 +150,7 @@ public class TestNewCamera extends TestShaders
             y = Classe.HAUTEUR/2;
         }
 
-        if ((!canJump) && (!keyPressed))
+        if ((!canJump) && (!keyPressed) && vY == 0)
         {
             canJump = true;
         }
