@@ -62,16 +62,16 @@ public class Mur extends Boite
 
         b.tint(color, alpha);
 
-        this.fenetres.add(b.finilize(largeur, hauteur, longueur));
+        this.fenetres.add(b.finalize(largeur, hauteur, longueur));
 
         return this;
     }
 
     @Override
-    public Boite finilize(float largeur, float hauteur, float longeur)
+    public Boite finalize(float largeur, float hauteur, float longeur)
     {
         if(this.fenetres.size() == 0)
-            return super.finilize(largeur, hauteur, longeur);
+            return super.finalize(largeur, hauteur, longeur);
 
         if(Math.abs(longeur) > Math.abs(largeur))
             this.addFenetreAxeZ(largeur, hauteur, longeur);
@@ -95,16 +95,16 @@ public class Mur extends Boite
             this.addChild(fenetre);
 
         this.addChild(new Boite(applet, this.origX, this.origY, this.origZ)
-                .finilize(largeur, fenetre.getOrigY(), longeur));
+                .finalize(largeur, fenetre.getOrigY(), longeur));
 
         this.addChild(new Boite(applet, this.origX, fenetre.getOrigY(), fenetre.getOrigZ() + fenetre.getLongeur())
-                .finilize(largeur, hauteur - fenetre.getOrigY(), longeur - (fenetre.getOrigZ()+fenetre.getLongeur())));
+                .finalize(largeur, hauteur - fenetre.getOrigY(), longeur - (fenetre.getOrigZ()+fenetre.getLongeur())));
 
         this.addChild(new Boite(applet, this.origX, fenetre.getOrigY() + fenetre.getHauteur(), this.origZ)
-                .finilize(largeur, hauteur - (fenetre.getOrigY() + fenetre.getHauteur()), fenetre.getOrigZ() + fenetre.getLongeur()));
+                .finalize(largeur, hauteur - (fenetre.getOrigY() + fenetre.getHauteur()), fenetre.getOrigZ() + fenetre.getLongeur()));
 
         this.addChild(new Boite(applet, this.origX, fenetre.getOrigY(), this.origZ)
-                .finilize(largeur, fenetre.getHauteur(), fenetre.getOrigZ()));
+                .finalize(largeur, fenetre.getHauteur(), fenetre.getOrigZ()));
     }
 
     private void addFenetreAxeX(float largeur, float hauteur, float longeur)
@@ -115,16 +115,16 @@ public class Mur extends Boite
             this.addChild(fenetre);
 
         this.addChild(new Boite(applet, this.origX, this.origY, this.origZ)
-                .tint(this.tints[0]).finilize(largeur, fenetre.getOrigY() - this.origY, longeur));
+                .tint(this.tints[0]).finalize(largeur, fenetre.getOrigY() - this.origY, longeur));
 
         this.addChild(new Boite(applet,fenetre.getOrigX() + fenetre.getLargeur(), fenetre.getOrigY(), this.origZ)
-                .tint(this.tints[0]).finilize((this.origX + largeur) - (fenetre.getOrigX() + fenetre.getLargeur()), hauteur - (fenetre.getOrigY() - this.origY), longeur));
+                .tint(this.tints[0]).finalize((this.origX + largeur) - (fenetre.getOrigX() + fenetre.getLargeur()), hauteur - (fenetre.getOrigY() - this.origY), longeur));
 
         this.addChild(new Boite(applet, this.origX, fenetre.getOrigY() + fenetre.getHauteur(), this.origZ)
-                .tint(this.tints[0]).finilize((fenetre.getOrigX() - this.getOrigX()) + fenetre.getLargeur(), hauteur - ((fenetre.getOrigY() - this.origY) + fenetre.getHauteur()), longeur));
+                .tint(this.tints[0]).finalize((fenetre.getOrigX() - this.getOrigX()) + fenetre.getLargeur(), hauteur - ((fenetre.getOrigY() - this.origY) + fenetre.getHauteur()), longeur));
 
         this.addChild(new Boite(applet, this.origX, fenetre.getOrigY(), this.origZ)
-                .tint(this.tints[0]).finilize(fenetre.getOrigX() - this.getOrigX(), fenetre.getHauteur(), longeur));
+                .tint(this.tints[0]).finalize(fenetre.getOrigX() - this.getOrigX(), fenetre.getHauteur(), longeur));
     }
 
     public Mur fillTrou(boolean fill)

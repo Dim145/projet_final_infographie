@@ -1,7 +1,6 @@
 package pfd.components;
 
 import pfd.baseComponents.Composand3D;
-import pfd.baseComponents.Face;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -29,6 +28,6 @@ public class Radiateur extends Composand3D
 
         b.texture(image);
 
-        return b.finilize(LONGUEUR, HAUTEUR, EPAISSEUR);
+        return b.finalize(LONGUEUR, HAUTEUR, EPAISSEUR);
     }
 }

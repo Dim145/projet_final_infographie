@@ -55,7 +55,7 @@ public class Chaise extends Composand3D
 
         b.tint(Utilities.RED);
 
-        return b.finilize(EPAISSEUR_PLATEAU, (arriere ? HAUTEUR : COTE), EPAISSEUR_PLATEAU);
+        return b.finalize(EPAISSEUR_PLATEAU, (arriere ? HAUTEUR : COTE), EPAISSEUR_PLATEAU);
     }
 
     private PShape creerPlateau()
@@ -64,7 +64,7 @@ public class Chaise extends Composand3D
 
         b.texture(plat);
 
-        return b.finilize(COTE, EPAISSEUR_PLATEAU, COTE);
+        return b.finalize(COTE, EPAISSEUR_PLATEAU, COTE);
     }
 
     private PShape creerDossier(boolean sensInverser)
@@ -75,6 +75,6 @@ public class Chaise extends Composand3D
 
         b.texture(Face.DERRIERE, dossier_avant).texture(Face.DERRIERE, dossier_arriere);
 
-        return b.finilize(EPAISSEUR_PLATEAU, HAUTEUR*0.25f, COTE + (COTE/RATIO_DOSSIER_DEPASSEMENT)*2);
+        return b.finalize(EPAISSEUR_PLATEAU, HAUTEUR*0.25f, COTE + (COTE/RATIO_DOSSIER_DEPASSEMENT)*2);
     }
 }

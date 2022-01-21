@@ -43,7 +43,7 @@ public class Table extends Composand3D
         b.shininess(Utilities.METAL_SHININESS);
         b.tint(Utilities.BLACK);
 
-        return b.finilize(EPAISSEUR_PLATEUR, HAUTEUR, EPAISSEUR_PLATEUR);
+        return b.finalize(EPAISSEUR_PLATEUR, HAUTEUR, EPAISSEUR_PLATEUR);
     }
 
     private PShape creerPlateau()
@@ -54,6 +54,6 @@ public class Table extends Composand3D
         b.tint(Face.DESSU, Utilities.CYAN).texture(Face.DESSU, haut);
         b.tint(Face.DESSOU, null);
 
-        return b.finilize(LARGUEUR, EPAISSEUR_PLATEUR, LONGUEUR);
+        return b.finalize(LARGUEUR, EPAISSEUR_PLATEUR, LONGUEUR);
     }
 }

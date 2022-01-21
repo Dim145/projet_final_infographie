@@ -230,7 +230,7 @@ public class Boite extends Composand3D
      * @param longeur longeur sur axeZ
      * @return this
      */
-    public Boite finilize(float largeur, float hauteur, float longeur)
+    public Boite finalize(float largeur, float hauteur, float longeur)
     {
         this.hauteur = hauteur;
         this.largeur = largeur;
@@ -355,7 +355,7 @@ public class Boite extends Composand3D
     public void draw(PGraphics g)
     {
         if(!isFinilise)
-            this.finilize(10, 10, 10);
+            this.finalize(10, 10, 10);
 
         super.draw(g);
     }

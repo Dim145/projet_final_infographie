@@ -7,8 +7,6 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
 
-import java.awt.*;
-
 public class Ordinateur extends Composand3D
 {
     public static final int LARGUEUR = 20;
@@ -84,7 +82,7 @@ public class Ordinateur extends Composand3D
         // images 1 et 2 trop blanches. Pour evité cela, mise en place d'un filtre gris
         b.tint(Face.DEVANT, selectedIndex == 1 || selectedIndex == 2 ? Utilities.DARK_WHITE : null).texture(Face.DEVANT, ecran).setShininess(Face.DEVANT.ordinal(), Utilities.IMAGE_SHININESS*2);
 
-        return b.finilize(EPAISSEUR, LARGUEUR, LONGUEUR);
+        return b.finalize(EPAISSEUR, LARGUEUR, LONGUEUR);
     }
 
     private PShape creerPied(float baseX, float baseZ)
@@ -95,7 +93,7 @@ public class Ordinateur extends Composand3D
 
         b.tint(Integer.valueOf(Utilities.BLACK)).shininess(Utilities.MAT_SHININESS);
 
-        return b.finilize(EPAISSEUR, HAUTEUR_ECRAN * 2, HAUTEUR_ECRAN);
+        return b.finalize(EPAISSEUR, HAUTEUR_ECRAN * 2, HAUTEUR_ECRAN);
     }
 
     private PShape creerPlat(float baseZ)
@@ -106,7 +104,7 @@ public class Ordinateur extends Composand3D
 
         b.tint(Integer.valueOf(Utilities.BLACK)).shininess(Utilities.MAT_SHININESS);
 
-        return b.finilize(EPAISSEUR * 2, EPAISSEUR/2f, HAUTEUR_ECRAN + EPAISSEUR);
+        return b.finalize(EPAISSEUR * 2, EPAISSEUR/2f, HAUTEUR_ECRAN + EPAISSEUR);
     }
 
     private PShape creerTour(boolean gauche)
@@ -117,7 +115,7 @@ public class Ordinateur extends Composand3D
 
         b.tint(Face.DEVANT, null).texture(Face.DEVANT, tour_avant).setShininess(Face.DEVANT.ordinal(), Utilities.SUPER_MAT_SHININESS);
 
-        return b.finilize(LARGEUR_TOUR, HAUTEUR_ECRAN*2, HAUTEUR_ECRAN);
+        return b.finalize(LARGEUR_TOUR, HAUTEUR_ECRAN*2, HAUTEUR_ECRAN);
     }
 
     private PShape creerClavier()
@@ -130,6 +128,6 @@ public class Ordinateur extends Composand3D
 
         b.tint(Face.DESSU, null).texture(Face.DESSU, clavier).setShininess(Face.DESSU.ordinal(), Utilities.SUPER_MAT_SHININESS);
 
-        return b.finilize(LARGEUR_CLAVIER, EPAISSEUR / 2f, HAUTEUR_ECRAN * 2);
+        return b.finalize(LARGEUR_CLAVIER, EPAISSEUR / 2f, HAUTEUR_ECRAN * 2);
     }
 }

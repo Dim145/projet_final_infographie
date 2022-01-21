@@ -2,7 +2,6 @@ package pfd.components;
 
 import pfd.Utilities;
 import pfd.baseComponents.Composand3D;
-import pfd.baseComponents.Face;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -48,7 +47,7 @@ public class Porte extends Composand3D
 
         b.tint(Integer.valueOf(Utilities.CYAN)).texture(texture);
 
-        return b.finilize(onZAxe ? EPAISSEUR : LONGUEUR, HAUTEUR, onZAxe ? LONGUEUR : EPAISSEUR);
+        return b.finalize(onZAxe ? EPAISSEUR : LONGUEUR, HAUTEUR, onZAxe ? LONGUEUR : EPAISSEUR);
     }
 
     private Boite creerPoignee(boolean avant)
@@ -66,16 +65,16 @@ public class Porte extends Composand3D
         p1.tint(Utilities.DARK_GRAY);
         p1.shininess(Utilities.METAL_SHININESS);
 
-        b.addChild(p1.finilize(onZAxe ? avant ? DISTANCE_POIGNEE : -DISTANCE_POIGNEE : LONGUEUR_POIGNEE/2, LONGUEUR_POIGNEE/2, onZAxe ? LONGUEUR_POIGNEE/2 : avant ? DISTANCE_POIGNEE : -DISTANCE_POIGNEE));
+        b.addChild(p1.finalize(onZAxe ? avant ? DISTANCE_POIGNEE : -DISTANCE_POIGNEE : LONGUEUR_POIGNEE/2, LONGUEUR_POIGNEE/2, onZAxe ? LONGUEUR_POIGNEE/2 : avant ? DISTANCE_POIGNEE : -DISTANCE_POIGNEE));
 
         Boite p2 = new Boite(applet, p1.getOrigX() + p1.getLargeur(), p1.getOrigY(), p1.getOrigZ() + p1.getLongeur());
 
         p2.tint(Utilities.DARK_GRAY);
         p2.shininess(Utilities.METAL_SHININESS);
 
-        b.addChild(p2.finilize(onZAxe ? LONGUEUR_POIGNEE/2 : LONGUEUR_POIGNEE*-2, p1.getHauteur(), onZAxe ? LONGUEUR_POIGNEE*-2 : LONGUEUR_POIGNEE/2));
+        b.addChild(p2.finalize(onZAxe ? LONGUEUR_POIGNEE/2 : LONGUEUR_POIGNEE*-2, p1.getHauteur(), onZAxe ? LONGUEUR_POIGNEE*-2 : LONGUEUR_POIGNEE/2));
 
-        return b.finilize(onZAxe ? 2 : HAUTEUR_POIGNEE, HAUTEUR_POIGNEE, onZAxe ? HAUTEUR_POIGNEE : 2);
+        return b.finalize(onZAxe ? 2 : HAUTEUR_POIGNEE, HAUTEUR_POIGNEE, onZAxe ? HAUTEUR_POIGNEE : 2);
     }
 
     public void openClose()

@@ -1,6 +1,5 @@
 package pfd.components;
 
-import pfd.Utilities;
 import pfd.baseComponents.Composand3D;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -28,7 +27,7 @@ public class Sol extends Composand3D
 
         b.texture(sol);
 
-        b.finilize(finalX, EPAISSEUR, finalZ);
+        b.finalize(finalX, EPAISSEUR, finalZ);
 
         return b;
     }

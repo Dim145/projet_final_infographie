@@ -81,7 +81,7 @@ public class TestShaders extends TestsCamera
             lights = new Boite[lightPos.length];
 
             for (int i = 0; i < lights.length; i++)
-                lights[i] = new Boite(this, lightPos[i].x, lightPos[i].y-10, lightPos[i].z).addStroke().finilize(10, 10, 10);
+                lights[i] = new Boite(this, lightPos[i].x, lightPos[i].y-10, lightPos[i].z).addStroke().finalize(10, 10, 10);
         }).start();
 
         this.shader = loadShader("shaders/fragment.glsl", "shaders/vert.glsl");

@@ -13,6 +13,6 @@ public class Curseur extends Boite
 
         this.tint(Utilities.RED);
 
-        this.finilize(TAILLE, TAILLE, TAILLE);
+        this.finalize(TAILLE, TAILLE, TAILLE);
     }
 }

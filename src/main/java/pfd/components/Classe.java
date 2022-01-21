@@ -80,9 +80,9 @@ public class Classe extends Composand3D
 
         this.addChild(new Porte(applet, this.origX - Sol.EPAISSEUR, this.origY + Sol.EPAISSEUR, this.origZ + Sol.EPAISSEUR*2, true));
 
-        murs[1].finilize(this.getLargeur() + Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
-        murs[2].finilize(Sol.EPAISSEUR, HAUTEUR, this.getLongueur() + Sol.EPAISSEUR);
-        murs[0].finilize(-Sol.EPAISSEUR, HAUTEUR, this.getLongueur());
+        murs[1].finalize(this.getLargeur() + Sol.EPAISSEUR, HAUTEUR, Sol.EPAISSEUR);
+        murs[2].finalize(Sol.EPAISSEUR, HAUTEUR, this.getLongueur() + Sol.EPAISSEUR);
+        murs[0].finalize(-Sol.EPAISSEUR, HAUTEUR, this.getLongueur());
 
         Mur basMurF = new Mur(applet, this.origX - Sol.EPAISSEUR, this.origY, this.origZ - Sol.EPAISSEUR);
 
@@ -120,9 +120,9 @@ public class Classe extends Composand3D
         }
 
         basMurF.addChild(new Mur(applet, this.origX - Sol.EPAISSEUR, HAUTEUR - Sol.EPAISSEUR, this.origZ - Sol.EPAISSEUR)
-                .finilize(this.getLargeur() + Sol.EPAISSEUR*2, Sol.EPAISSEUR, Sol.EPAISSEUR));
+                .finalize(this.getLargeur() + Sol.EPAISSEUR*2, Sol.EPAISSEUR, Sol.EPAISSEUR));
 
-        murs[3] = (Mur) basMurF.finilize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR/3 - Sol.EPAISSEUR, Sol.EPAISSEUR);
+        murs[3] = (Mur) basMurF.finalize(this.getLargeur() + Sol.EPAISSEUR*2, HAUTEUR/3 - Sol.EPAISSEUR, Sol.EPAISSEUR);
 
         for (Boite m : murs)
             this.addChild(m);
@@ -153,6 +153,6 @@ public class Classe extends Composand3D
                 largeur - Sol.EPAISSEUR*2, hauteur - Sol.EPAISSEUR*2, longeur,
                 true, Utilities.DARK_WHITE, 100f);
 
-        return (Mur) f1.finilize(largeur, hauteur, longeur);
+        return (Mur) f1.finalize(largeur, hauteur, longeur);
     }
 }

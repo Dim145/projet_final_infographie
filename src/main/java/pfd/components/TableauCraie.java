@@ -38,7 +38,7 @@ public class TableauCraie extends Composand3D
 
         b.tint(Face.DEVANT, Color.GREEN.getRGB()).texture(Face.DEVANT, tableau);
 
-        return b.finilize(EPAISSEUR, HAUTEUR, this.longueur);
+        return b.finalize(EPAISSEUR, HAUTEUR, this.longueur);
     }
 
     private Boite creerRebord()
@@ -47,6 +47,6 @@ public class TableauCraie extends Composand3D
 
         b.tint(Utilities.LIGHT_GRAY);
 
-        return b.finilize(EPAISSEUR*2, EPAISSEUR/2f, this.longueur - 1f);
+        return b.finalize(EPAISSEUR*2, EPAISSEUR/2f, this.longueur - 1f);
     }
 }
